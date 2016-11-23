@@ -1,4 +1,21 @@
 Rails.application.routes.draw do
+  # Routes for the Measurement resource:
+  # CREATE
+  get "/measurements/new", :controller => "measurements", :action => "new"
+  post "/create_measurement", :controller => "measurements", :action => "create"
+
+  # READ
+  get "/measurements", :controller => "measurements", :action => "index"
+  get "/measurements/:id", :controller => "measurements", :action => "show"
+
+  # UPDATE
+  get "/measurements/:id/edit", :controller => "measurements", :action => "edit"
+  post "/update_measurement/:id", :controller => "measurements", :action => "update"
+
+  # DELETE
+  get "/delete_measurement/:id", :controller => "measurements", :action => "destroy"
+  #------------------------------
+
   # Routes for the Ingredient_category resource:
   # CREATE
   get "/ingredient_categories/new", :controller => "ingredient_categories", :action => "new"
