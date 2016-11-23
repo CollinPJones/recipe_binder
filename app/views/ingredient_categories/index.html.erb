@@ -1,0 +1,28 @@
+<div class="page-header">
+  <h1>
+    Ingredient categories
+    <a href="/ingredient_categories/new" class="btn btn-lg btn-success">New Ingredient category</a>
+  </h1>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>Name</th>
+        <th>Actions</th>
+      </tr>
+
+      <% @ingredient_categories.each do |ingredient_category| %>
+      <tr>
+        <td><%= ingredient_category.name %></td>
+        <td>
+          <a href="/ingredient_categories/<%= ingredient_category.id %>" class="btn btn-primary">Show</a>
+          <a href="/ingredient_categories/<%= ingredient_category.id %>/edit" class="btn btn-warning">Edit</a>
+          <a href="/delete_ingredient_category/<%= ingredient_category.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
