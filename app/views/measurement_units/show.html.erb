@@ -1,0 +1,28 @@
+<div class="page-header">
+  <h3>Measurement Unit #<%= @measurement_unit.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12 mb-2">
+    <dl class="dl-horizontal">
+      <dt>Name</dt>
+      <dd><%= @measurement_unit.name %></dd>
+
+      <dt>Measurement</dt>
+      <dd><%= @measurement_unit.measurement_id %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/measurement_units" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/measurement_units/<%= @measurement_unit.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_measurement_unit/<%= @measurement_unit.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>

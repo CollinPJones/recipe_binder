@@ -1,4 +1,21 @@
 Rails.application.routes.draw do
+  # Routes for the Measurement_unit resource:
+  # CREATE
+  get "/measurement_units/new", :controller => "measurement_units", :action => "new"
+  post "/create_measurement_unit", :controller => "measurement_units", :action => "create"
+
+  # READ
+  get "/measurement_units", :controller => "measurement_units", :action => "index"
+  get "/measurement_units/:id", :controller => "measurement_units", :action => "show"
+
+  # UPDATE
+  get "/measurement_units/:id/edit", :controller => "measurement_units", :action => "edit"
+  post "/update_measurement_unit/:id", :controller => "measurement_units", :action => "update"
+
+  # DELETE
+  get "/delete_measurement_unit/:id", :controller => "measurement_units", :action => "destroy"
+  #------------------------------
+
   # Routes for the Measurement resource:
   # CREATE
   get "/measurements/new", :controller => "measurements", :action => "new"
