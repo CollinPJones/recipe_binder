@@ -13,4 +13,7 @@ class Ingredient < ActiveRecord::Base
 
   #Ingredients to Measurement Unit Association
   belongs_to :purchase_unit, class_name: "MeasurementUnit", foreign_key: "purchase_measurement_unit_id"
+
+  #Ingredients to Measurement Association
+  belongs_to :measurement, through: :purchase_unit
 end
