@@ -1,4 +1,55 @@
 Rails.application.routes.draw do
+  # Routes for the Recipe_ingredient resource:
+  # CREATE
+  get "/recipe_ingredients/new", :controller => "recipe_ingredients", :action => "new"
+  post "/create_recipe_ingredient", :controller => "recipe_ingredients", :action => "create"
+
+  # READ
+  get "/recipe_ingredients", :controller => "recipe_ingredients", :action => "index"
+  get "/recipe_ingredients/:id", :controller => "recipe_ingredients", :action => "show"
+
+  # UPDATE
+  get "/recipe_ingredients/:id/edit", :controller => "recipe_ingredients", :action => "edit"
+  post "/update_recipe_ingredient/:id", :controller => "recipe_ingredients", :action => "update"
+
+  # DELETE
+  get "/delete_recipe_ingredient/:id", :controller => "recipe_ingredients", :action => "destroy"
+  #------------------------------
+
+  # Routes for the Recipe resource:
+  # CREATE
+  get "/recipes/new", :controller => "recipes", :action => "new"
+  post "/create_recipe", :controller => "recipes", :action => "create"
+
+  # READ
+  get "/recipes", :controller => "recipes", :action => "index"
+  get "/recipes/:id", :controller => "recipes", :action => "show"
+
+  # UPDATE
+  get "/recipes/:id/edit", :controller => "recipes", :action => "edit"
+  post "/update_recipe/:id", :controller => "recipes", :action => "update"
+
+  # DELETE
+  get "/delete_recipe/:id", :controller => "recipes", :action => "destroy"
+  #------------------------------
+
+  # Routes for the Course resource:
+  # CREATE
+  get "/courses/new", :controller => "courses", :action => "new"
+  post "/create_course", :controller => "courses", :action => "create"
+
+  # READ
+  get "/courses", :controller => "courses", :action => "index"
+  get "/courses/:id", :controller => "courses", :action => "show"
+
+  # UPDATE
+  get "/courses/:id/edit", :controller => "courses", :action => "edit"
+  post "/update_course/:id", :controller => "courses", :action => "update"
+
+  # DELETE
+  get "/delete_course/:id", :controller => "courses", :action => "destroy"
+  #------------------------------
+
   # Routes for the Ingredient resource:
   # CREATE
   get "/ingredients/new", :controller => "ingredients", :action => "new"

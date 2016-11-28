@@ -1,0 +1,100 @@
+<!-- Validation failure messages -->
+<% if @recipe.errors.any? %>
+  <% @recipe.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Recipe</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_recipe" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for name -->
+      <div class="form-group">
+        <label for="name" class="control-label">
+          Name
+        </label>
+
+        <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= @recipe.name %>">
+      </div>
+
+      <!-- Label and input for cook_temp -->
+      <div class="form-group">
+        <label for="cook_temp" class="control-label">
+          Cook temp
+        </label>
+
+        <input type="text" id="cook_temp" name="cook_temp" placeholder="Cook temp" class="form-control" value="<%= @recipe.cook_temp %>">
+      </div>
+
+      <!-- Label and input for cook_time_hrs -->
+      <div class="form-group">
+        <label for="cook_time_hrs" class="control-label">
+          Cook time hrs
+        </label>
+
+        <input type="text" id="cook_time_hrs" name="cook_time_hrs" placeholder="Cook time hrs" class="form-control" value="<%= @recipe.cook_time_hrs %>">
+      </div>
+
+      <!-- Label and input for cook_time_minutes -->
+      <div class="form-group">
+        <label for="cook_time_minutes" class="control-label">
+          Cook time minutes
+        </label>
+
+        <input type="text" id="cook_time_minutes" name="cook_time_minutes" placeholder="Cook time minutes" class="form-control" value="<%= @recipe.cook_time_minutes %>">
+      </div>
+
+      <!-- Label and input for servings -->
+      <div class="form-group">
+        <label for="servings" class="control-label">
+          Servings
+        </label>
+
+        <input type="text" id="servings" name="servings" placeholder="Servings" class="form-control" value="<%= @recipe.servings %>">
+      </div>
+
+      <!-- Label and input for directions -->
+      <div class="form-group">
+        <label for="directions" class="control-label">
+          Directions
+        </label>
+
+        <textarea id="directions" name="directions" placeholder="Directions" class="form-control" rows="3"><%= @recipe.directions %></textarea>
+      </div>
+
+      <!-- Label and input for user_id -->
+      <div class="form-group">
+        <label for="user_id" class="control-label">
+          User
+        </label>
+
+        <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @recipe.user_id %>">
+      </div>
+
+      <!-- Label and input for course_id -->
+      <div class="form-group">
+        <label for="course_id" class="control-label">
+          Course
+        </label>
+
+        <input type="text" id="course_id" name="course_id" placeholder="Course" class="form-control" value="<%= @recipe.course_id %>">
+      </div>
+
+      <button class="btn btn-success">
+        Create Recipe
+      </button>
+      or
+      <a href="/recipes">Cancel</a>
+    </form>
+  </div>
+</div>
