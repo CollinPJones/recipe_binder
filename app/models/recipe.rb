@@ -7,4 +7,6 @@ class Recipe < ActiveRecord::Base
   #Associations
   #Recipe Ingredient to Recipe Association
   has_many :recipe_ingredients
+  #Recipes to Course Assocaition
+  belongs_to :course
 end
