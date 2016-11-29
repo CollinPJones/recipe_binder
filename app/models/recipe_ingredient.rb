@@ -9,4 +9,5 @@ class RecipeIngredient < ActiveRecord::Base
   #Associations
   #Recipe Ingredient to Recipe Association
   belongs_to :recipe
+  belongs_to :ingredient
 end

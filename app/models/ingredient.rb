@@ -16,4 +16,7 @@ class Ingredient < ActiveRecord::Base
 
   #Ingredients to Measurement Association
   has_one :measurement, through: :purchase_unit, source: :measurement
+
+  #Ingredient to Recipe Ingredients
+  has_many :recipe_ingredients
 end
