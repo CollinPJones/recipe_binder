@@ -1,7 +1,7 @@
 class RecipesController < ApplicationController
   def index
     @recipes = Recipe.all
-    @courses = Course.order("name")
+    @courses = Course.all.order("name")
     render("recipes/index.html.erb")
   end
 
