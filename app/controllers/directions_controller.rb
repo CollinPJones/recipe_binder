@@ -66,4 +66,13 @@ class DirectionsController < ApplicationController
       redirect_to(:back, :notice => "Direction deleted.")
     end
   end
+
+  def step_up
+    @ingredient_a = RecipeIngredient.find_by(params[:id])
+    @ingredient_b = RecipeIngredient.where(recipe_id: @ingredient_a.recipe.id).find_by(step: (@ingredient_a.step +1))
+    @ingredient_a.step = @ingredient_b.step
+    @ingredient_b.step = @ingredient_a.step – 1
+    @ingredient_a.save
+    @ingredient_b.save
+  end
 end
