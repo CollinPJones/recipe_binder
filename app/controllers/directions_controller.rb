@@ -69,10 +69,31 @@ class DirectionsController < ApplicationController
 
   def step_up
     @ingredient_a = RecipeIngredient.find_by(params[:id])
-    @ingredient_b = RecipeIngredient.where(recipe_id: @ingredient_a.recipe.id).find_by(step: (@ingredient_a.step +1))
+    @ingredient_b = RecipeIngredient.where(recipe_id: @ingredient_a.recipe.id).find_by(step: (@ingredient_a.step + 1))
     @ingredient_a.step = @ingredient_b.step
     @ingredient_b.step = @ingredient_a.step – 1
     @ingredient_a.save
     @ingredient_b.save
+
+    if save_status == true
+      redirect_to(:back, :notice => "Step order updated successfully.")
+    else
+      redirect_to(:back, :notice => "Step order update unsuccessful.")
+    end
+  end
+
+  def step_down
+    @ingredient_a = RecipeIngredient.find_by(params[:id])
+    @ingredient_b = RecipeIngredient.where(recipe_id: @ingredient_a.recipe.id).find_by(step: (@ingredient_a.step - 1))
+    @ingredient_a.step = @ingredient_b.step
+    @ingredient_b.step = @ingredient_a.step + 1
+    @ingredient_a.save
+    @ingredient_b.save
+
+    if save_status == true
+      redirect_to(:back, :notice => "Step order updated successfully.")
+    else
+      redirect_to(:back, :notice => "Step order update unsuccessful.")
+    end
   end
 end
