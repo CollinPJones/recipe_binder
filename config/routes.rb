@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  #Root Route
+  root "recipes#index"
+  #------------------------------
+
   # Routes for the Direction resource:
   # CREATE
   get "/directions/new", :controller => "directions", :action => "new"
@@ -15,9 +19,6 @@ Rails.application.routes.draw do
   # DELETE
   get "/delete_direction/:id", :controller => "directions", :action => "destroy"
   #------------------------------
-
-  #Root Route
-  root "recipes#index"
 
   # Routes for the Recipe_ingredient resource:
   # CREATE
