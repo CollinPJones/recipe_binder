@@ -5,6 +5,14 @@ Rails.application.routes.draw do
 
   # Routes for the Direction resource:
   # CREATE
+  get "/create_rating/:recipe_id/:user_id/:score", controller: "ratings", action: "create"
+
+  #UPDATE
+  get "/update_rating/:id/:score", controller: "ratings", action: "update"
+  #------------------------------
+  
+  # Routes for the Direction resource:
+  # CREATE
   get "/directions/new", :controller => "directions", :action => "new"
   post "/create_direction", :controller => "directions", :action => "create"
 

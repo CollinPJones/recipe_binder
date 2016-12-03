@@ -62,9 +62,9 @@
 <font color="gold">
 <% b = 4.5 %>
 <% for i in 1..5 do %>
-  <% if i.to_f <= b %>
+  <% if (i.to_f - 0.25) <= b %>
   <i class="fa fa-star fa-lg" aria-hidden="true"></i>
-  <% elsif (i.to_f - 0.5) <= b%>
+  <% elsif  (i.to_f - 0.75) <= b %>
   <i class="fa fa-star-half-o fa-lg" aria-hidden="true"></i>
   <% else %>
   <i class="fa fa-star-o fa-lg" aria-hidden="true"></i>
