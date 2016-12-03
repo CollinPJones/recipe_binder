@@ -6,4 +6,7 @@ class User < ApplicationRecord
   #Validations
   validates :username, presence: true
 
+  #Associations
+  #User to Recipes Assonciations
+  has_many :recipes
 end
