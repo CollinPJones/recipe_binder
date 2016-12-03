@@ -16,5 +16,7 @@ class User < ApplicationRecord
   #Ties Recipe ratings to User
   has_many :recipe_ratings, through: :recipes, source: :ratings
 
-
+  def cook_book_rating
+    self.recipe_ratings.average("score")
+  end
 end
