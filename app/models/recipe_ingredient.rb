@@ -9,5 +9,12 @@ class RecipeIngredient < ActiveRecord::Base
   #Associations
   #Recipe Ingredient to Recipe Association
   belongs_to :recipe
+
+  #Recipe Ingredient to Ingredient Association
   belongs_to :ingredient
+
+  #Recipe Ingredient to Measurement Unit Association
+  has_one :unit, class_name: "MeasurementUnit", foreign_key: "measurement_id"
+
+
 end
