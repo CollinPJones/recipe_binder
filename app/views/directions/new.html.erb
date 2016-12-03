@@ -1,0 +1,55 @@
+<!-- Validation failure messages -->
+<% if @direction.errors.any? %>
+  <% @direction.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Direction</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_direction" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for recipe_id -->
+      <div class="form-group">
+        <label for="recipe_id" class="control-label">
+          Recipe
+        </label>
+
+        <input type="text" id="recipe_id" name="recipe_id" placeholder="Recipe" class="form-control" value="<%= @direction.recipe_id %>">
+      </div>
+
+      <!-- Label and input for step -->
+      <div class="form-group">
+        <label for="step" class="control-label">
+          Step
+        </label>
+
+        <input type="text" id="step" name="step" placeholder="Step" class="form-control" value="<%= @direction.step %>">
+      </div>
+
+      <!-- Label and input for description -->
+      <div class="form-group">
+        <label for="description" class="control-label">
+          Description
+        </label>
+
+        <textarea id="description" name="description" placeholder="Description" class="form-control" rows="3"><%= @direction.description %></textarea>
+      </div>
+
+      <button class="btn btn-success">
+        Create Direction
+      </button>
+      or
+      <a href="/directions">Cancel</a>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="page-header">
+  <h1>
+    Directions
+    <a href="/directions/new" class="btn btn-lg btn-success">New Direction</a>
+  </h1>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>Recipe</th>
+        <th>Step</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+
+      <% @directions.each do |direction| %>
+      <tr>
+        <td><%= direction.recipe_id %></td>
+        <td><%= direction.step %></td>
+        <td><%= direction.description %></td>
+        <td>
+          <a href="/directions/<%= direction.id %>" class="btn btn-primary">Show</a>
+          <a href="/directions/<%= direction.id %>/edit" class="btn btn-warning">Edit</a>
+          <a href="/delete_direction/<%= direction.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
