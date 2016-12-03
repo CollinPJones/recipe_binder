@@ -7,6 +7,14 @@ class User < ApplicationRecord
   validates :username, presence: true
 
   #Associations
-  #User to Recipes Assonciations
+  #User to Recipes Associations
   has_many :recipes
+
+  #User to Ratings Association
+  has_many :ratings
+
+  #Ties Recipe ratings to User
+  has_many :recipe_ratings, through: :recipes, source: :ratings
+
+
 end

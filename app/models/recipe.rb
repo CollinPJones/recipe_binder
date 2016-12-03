@@ -7,8 +7,13 @@ class Recipe < ActiveRecord::Base
   #Associations
   #Recipe Ingredient to Recipe Association
   has_many :recipe_ingredients
+
   #Recipes to Course Assocaition
   belongs_to :course
+
   #Recipes to User Association
   belongs_to :user
+
+  #Recipe to Rating Association
+  has_many :ratings
 end
