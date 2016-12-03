@@ -6,30 +6,47 @@
 </div>
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-8 col-md-offset-2">
     <table class="table table-striped table-hover">
       <tr>
+        <!--Name Header  -->
         <th>Name</th>
-        <th>Cook temp</th>
-        <th>Cook time hrs</th>
-        <th>Cook time minutes</th>
-        <th>Servings</th>
+        <!-- User Header -->
+        <th>Author</th>
+        <!-- Rating Header -->
+        <th>Rating</th>
+        <!-- Description Header -->
         <th>Description</th>
-        <th>User</th>
-        <th>Course</th>
+        <!-- Actions Header -->
         <th>Actions</th>
       </tr>
 
       <% @recipes.each do |recipe| %>
       <tr>
         <td><%= recipe.name %></td>
-        <td><%= recipe.cook_temp %></td>
-        <td><%= recipe.cook_time_hrs %></td>
-        <td><%= recipe.cook_time_minutes %></td>
-        <td><%= recipe.servings %></td>
-        <td><%= recipe.description %></td>
-        <td><%= recipe.user_id %></td>
-        <td><%= recipe.course_id %></td>
+        <td><%= recipe.user.username %></td>
+        <td>
+          <% if recipe.ratings == nil %>
+            <font color="grey">
+              <% for i in 1..5 do %>
+                <i class="fa fa-star-o fa-lg" aria-hidden="true"></i>
+              <% end %>
+           </font>
+          <% else %>
+            <font color="gold">
+              <% for i in 1..5 do %>
+                <% if (i.to_f - 0.25) <= recipe.average_rating %>
+                  <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+                <% elsif  (i.to_f - 0.75) <= recipe.average_rating %>
+                  <i class="fa fa-star-half-o fa-lg" aria-hidden="true"></i>
+                <% else %>
+                  <i class="fa fa-star-o fa-lg" aria-hidden="true"></i>
+                <% end %>
+              <% end %>
+            </font>
+          <% end %>
+        </td>
+        <td><%= recipe.description.truncate %></td>
         <td>
           <a href="/recipes/<%= recipe.id %>" class="btn btn-primary">Show</a>
 
