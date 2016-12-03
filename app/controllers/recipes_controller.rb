@@ -25,7 +25,7 @@ class RecipesController < ApplicationController
     @recipe.cook_time_hrs = params[:cook_time_hrs]
     @recipe.cook_time_minutes = params[:cook_time_minutes]
     @recipe.servings = params[:servings]
-    @recipe.directions = params[:directions]
+    @recipe.description = params[:description]
     @recipe.user_id = params[:user_id]
     @recipe.course_id = params[:course_id]
 
@@ -52,7 +52,7 @@ class RecipesController < ApplicationController
     @recipe.cook_time_hrs = params[:cook_time_hrs]
     @recipe.cook_time_minutes = params[:cook_time_minutes]
     @recipe.servings = params[:servings]
-    @recipe.directions = params[:directions]
+    @recipe.description = params[:description]
     @recipe.user_id = params[:user_id]
     @recipe.course_id = params[:course_id]
 
