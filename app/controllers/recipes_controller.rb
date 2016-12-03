@@ -7,6 +7,8 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
+    @ingredients = @recipe.recipe_ingredients
+    @directions = @recipe.directions
 
     render("recipes/show.html.erb")
   end
@@ -40,6 +42,8 @@ class RecipesController < ApplicationController
 
   def edit
     @recipe = Recipe.find(params[:id])
+    @ingredients = @recipe.recipe_ingredients
+    @directions = @recipe.directions
 
     render("recipes/edit.html.erb")
   end

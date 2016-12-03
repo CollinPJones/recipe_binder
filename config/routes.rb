@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   # UPDATE
   get "/directions/:id/edit", :controller => "directions", :action => "edit"
   post "/update_direction/:id", :controller => "directions", :action => "update"
+  post "/step_up_direction/:id", :controller => "directions", :action => "step_up"
+  post "/step_down_direction/:id", :controller => "directions", :action => "step_down"
 
   # DELETE
   get "/delete_direction/:id", :controller => "directions", :action => "destroy"
