@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   def index
-    @courses = Course.all
+    @courses = Course.all.order("name")
 
     render("courses/index.html.erb")
   end
@@ -25,7 +25,7 @@ class CoursesController < ApplicationController
     save_status = @course.save
 
     if save_status == true
-      redirect_to("/courses/#{@course.id}", :notice => "Course created successfully.")
+      redirect_to("/courses", :notice => "Course created successfully.")
     else
       render("courses/new.html.erb")
     end
