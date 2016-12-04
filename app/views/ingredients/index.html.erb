@@ -7,223 +7,188 @@
 
 <!-- Beginning of Category Loop  -->
 <% @categories.each do |category| %>
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
-    <table class="table table-striped table-hover">
-      <tr>
-
-        <!-- Table Header for Ingredient Name (Displays Category Name) -->
-        <th><h2><%= category.name %></h2></th>
-
-        <!-- Table Header for Purchasable Amount -->
-        <th></th>
-
-        <!-- Table Header for Actions -->
-        <th></th>
-      </tr>
-
-      <!-- Beginning of Ingredient Loop -->
-      <% category.ingredients.order("name").each do |ingredient| %>
-      <tr>
-        <td><%= ingredient.name %></td>
-        <td>
-          (Purchasable amount:
-          <% if ingredient.measurement.name == "Quantity" %>
-          <% if ingredient.purchase_quantity.to_i > 1 %>
-          <%= "#{ingredient.purchase_container} of #{ingredient.purchase_quantity.ceil}" %>
-          <% else %>
-          <%= "#{ingredient.purchase_quantity.to_i} #{ingredient.purchase_container}" %>
-          <% end %>
-          <% elsif ingredient.purchase_quantity == ingredient.purchase_quantity.to_i.to_f %>
-          <% if ingredient.purchase_container == ingredient.purchase_unit.name %>
-          <%= "#{ingredient.purchase_quantity.to_i} #{ingredient.purchase_container}"%>
-          <% else %>
-          <%= "#{ingredient.purchase_quantity.to_i} #{ingredient.purchase_unit.name} #{ingredient.purchase_container}"%>
-          <% end %>
-          <% else %>
-          <%= "#{ingredient.purchase_quantity} #{ingredient.purchase_unit.name} #{ingredient.purchase_container}"%>
-          <% end %>
-          )
-        </td>
-        <td>
-
-          <!-- Show Moddl Button -->
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#my<%= ingredient.id %>">
-            <i class="fa fa-search" aria-hidden="true"></i>
-          </button>
-
-          <!-- Modal -->
-          <div class="modal fade" id="my<%= ingredient.id %>" tabindex="-1" role="dialog" aria-labelledby="my<%= ingredient.id %>Label">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title" id="my<%= ingredient.id %>Label">
-                    Ingredient #<%= ingredient.id %>
-                  </h4>
-                </div>
-                <div class="modal-body">
-                  <table class="table">
-                    <tr>
-                      <td></td>
-                      <td><h4>Name: </h4></td>
-                      <td><h4><%= ingredient.name %></h4></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td><h4>Category: </h4></td>
-                      <td><h4><%= ingredient.category.name %></h4></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td><h4>Purchase Qnty.: </h4></td>
-                      <td><h4><%= ingredient.purchase_quantity %></h4></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td><h4>Purchase Unit: </h4></td>
-                      <td><h4><%= ingredient.purchase_unit.name %></h4></td>
-                      <td></td>
-                    </tr>
-                  </table>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- End of Show Modal -->
-
-          <!-- Edit Modal Button -->
-          <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#my<%= ingredient.id %>Edit">
-            <i class="fa fa-pencil" aria-hidden="true"></i>
-          </button>
-
-          <!-- Edit Modal -->
-          <div class="modal fade" id="my<%= ingredient.id %>Edit" tabindex="-1" role="dialog" aria-labelledby="my<%= ingredient.id %>EditLabel">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title" id="my<%= ingredient.id %>EditLabel">
-                    Edit Ingredient #<%= ingredient.id %>
-                  </h4>
-                </div>
-
-                <form action="/update_ingredient/<%= ingredient.id %>" method="post">
-                  <div class="modal-body">
-
-                    <!-- Hidden input for authenticity token to protect from forgery -->
-                    <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-
-                    <!-- Label and input for name -->
-                    <div class="form-group">
-                      <label for="name" class="control-label">
-                        Name
-                      </label>
-
-                      <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= ingredient.name %>">
-                    </div>
-
-                    <!-- Label and input for purchase_container -->
-                    <div class="form-group">
-                      <label for="purchase_container" class="control-label">
-                        Purchase container
-                      </label>
-
-                      <input type="text" id="purchase_container" name="purchase_container" placeholder="Purchase container" class="form-control" value="<%= ingredient.purchase_container %>">
-                    </div>
-
-                    <!-- Label and input for purchase_quanitity -->
-                    <div class="form-group">
-                      <label for="purchase_quantity" class="control-label">
-                        Purchase quantity
-                      </label>
-
-                      <input type="text" id="purchase_quantity" name="purchase_quantity" placeholder="Purchase quantity" class="form-control" value="<%= ingredient.purchase_quantity %>">
-                    </div>
-
-                    <!-- Label and input for category_id -->
-                    <div class="form-group">
-                      <label for="category_id" class="control-label">
-                        Category
-                      </label>
-
-                      <input type="text" id="category_id" name="category_id" placeholder="Category" class="form-control" value="<%= ingredient.category_id %>">
-                    </div>
-
-                    <!-- Label and input for purchase_measurement_unit_id -->
-                    <div class="form-group">
-                      <label for="purchase_measurement_unit_id" class="control-label">
-                        Purchase measurement unit
-                      </label>
-
-                      <input type="text" id="purchase_measurement_unit_id" name="purchase_measurement_unit_id" placeholder="Purchase measurement unit" class="form-control" value="<%= ingredient.purchase_measurement_unit_id %>">
-                    </div>
-                  </div>
-
-                  <div class="modal-footer">
-                    <button class="btn btn-warning">
-                      Update Ingredient
-                    </button>
-                    or
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-          <!-- End of Edit Modal -->
-
-          <a href="/delete_ingredient/<%= ingredient.id %>" class="btn btn-danger" rel="nofollow"><i class="fa fa-trash" aria-hidden="true"></i></a>
-        </td>
-      </tr>
-      <% end %>
-      <!-- End of Ingredient Loop -->
-
-    </table>
+<div class="container">
+  <div class="row">
+    <div class="col-md-offset-2 col-md-8">
+      <h2><%= category.name %></h2>
+    </div>
   </div>
+
+  <% category.ingredients.order("name").each do |ingredient| %>
+  <div class="row">
+    <div class="col-md-offset-2 col-md-8">
+      <hr>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Ingredient Name -->
+    <div class="col-md-offset-2 col-md-2">
+      <%= ingredient.name %>
+    </div>
+
+    <!-- Ingredient Purchasable Amount -->
+    <div class="col-md-4">
+      (Purchasable amount:
+      <% if ingredient.measurement.name == "Quantity" %>
+      <% if ingredient.purchase_quantity.to_i > 1 %>
+      <%= "#{ingredient.purchase_container} of #{ingredient.purchase_quantity.ceil}" %>
+      <% else %>
+      <%= "#{ingredient.purchase_quantity.to_i} #{ingredient.purchase_container}" %>
+      <% end %>
+      <% elsif ingredient.purchase_quantity == ingredient.purchase_quantity.to_i.to_f %>
+      <% if ingredient.purchase_container == ingredient.purchase_unit.name %>
+      <%= "#{ingredient.purchase_quantity.to_i} #{ingredient.purchase_container}"%>
+      <% else %>
+      <%= "#{ingredient.purchase_quantity.to_i} #{ingredient.purchase_unit.name} #{ingredient.purchase_container}"%>
+      <% end %>
+      <% else %>
+      <%= "#{ingredient.purchase_quantity} #{ingredient.purchase_unit.name} #{ingredient.purchase_container}"%>
+      <% end %>
+      )
+    </div>
+
+    <!-- Ingredient Actions -->
+    <div class="col-md-2">
+      <!-- Show Modal Button -->
+      <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#my<%= ingredient.id %>">
+        <i class="fa fa-search" aria-hidden="true"></i>
+      </button>
+
+      <!-- ShowModal -->
+      <div class="modal fade" id="my<%= ingredient.id %>" tabindex="-1" role="dialog" aria-labelledby="my<%= ingredient.id %>Label">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="my<%= ingredient.id %>Label">
+                Ingredient #<%= ingredient.id %>
+              </h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <tr>
+                  <td></td>
+                  <td><h4>Name: </h4></td>
+                  <td><h4><%= ingredient.name %></h4></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td><h4>Category: </h4></td>
+                  <td><h4><%= ingredient.category.name %></h4></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td><h4>Purchase Qnty.: </h4></td>
+                  <td><h4><%= ingredient.purchase_quantity %></h4></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td><h4>Purchase Unit: </h4></td>
+                  <td><h4><%= ingredient.purchase_unit.name %></h4></td>
+                  <td></td>
+                </tr>
+              </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End of Show Modal -->
+
+      <!-- Edit Modal Button -->
+      <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#my<%= ingredient.id %>Edit">
+        <i class="fa fa-pencil" aria-hidden="true"></i>
+      </button>
+
+      <!-- Edit Modal -->
+      <div class="modal fade" id="my<%= ingredient.id %>Edit" tabindex="-1" role="dialog" aria-labelledby="my<%= ingredient.id %>EditLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="my<%= ingredient.id %>EditLabel">
+                Edit Ingredient #<%= ingredient.id %>
+              </h4>
+            </div>
+
+            <form action="/update_ingredient/<%= ingredient.id %>" method="post">
+              <div class="modal-body">
+
+                <!-- Hidden input for authenticity token to protect from forgery -->
+                <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+                <!-- Label and input for name -->
+                <div class="form-group">
+                  <label for="name" class="control-label">
+                    Name
+                  </label>
+
+                  <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= ingredient.name %>">
+                </div>
+
+                <!-- Label and input for purchase_container -->
+                <div class="form-group">
+                  <label for="purchase_container" class="control-label">
+                    Purchase container
+                  </label>
+
+                  <input type="text" id="purchase_container" name="purchase_container" placeholder="Purchase container" class="form-control" value="<%= ingredient.purchase_container %>">
+                </div>
+
+                <!-- Label and input for purchase_quanitity -->
+                <div class="form-group">
+                  <label for="purchase_quantity" class="control-label">
+                    Purchase quantity
+                  </label>
+
+                  <input type="text" id="purchase_quantity" name="purchase_quantity" placeholder="Purchase quantity" class="form-control" value="<%= ingredient.purchase_quantity %>">
+                </div>
+
+                <!-- Label and input for category_id -->
+                <div class="form-group">
+                  <label for="category_id" class="control-label">
+                    Category
+                  </label>
+
+                  <input type="text" id="category_id" name="category_id" placeholder="Category" class="form-control" value="<%= ingredient.category_id %>">
+                </div>
+
+                <!-- Label and input for purchase_measurement_unit_id -->
+                <div class="form-group">
+                  <label for="purchase_measurement_unit_id" class="control-label">
+                    Purchase measurement unit
+                  </label>
+
+                  <input type="text" id="purchase_measurement_unit_id" name="purchase_measurement_unit_id" placeholder="Purchase measurement unit" class="form-control" value="<%= ingredient.purchase_measurement_unit_id %>">
+                </div>
+              </div>
+
+              <div class="modal-footer">
+                <button class="btn btn-warning btn-sm">
+                  Update Ingredient
+                </button>
+                <%= " or " %>
+                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- End of Edit Modal -->
+
+      <a href="/delete_ingredient/<%= ingredient.id %>" class="btn btn-danger btn-sm" rel="nofollow"><i class="fa fa-trash" aria-hidden="true"></i></a>
+    </div>
+
+  </div>
+  <% end %>
+  <!-- End of Ingredients Loop -->
+
 </div>
 <% end %>
-<!-- End of Category Loop -->
-<div class="row">
-  <div class="col-md-12">
-    <table class="table table-striped table-hover">
-      <tr>
-        <th>Name</th>
-        <th>Purchase container</th>
-        <th>Purchase quantity</th>
-        <th>Category</th>
-        <th>Actions</th>
-      </tr>
-
-      <% @ingredients.each do |ingredient| %>
-      <tr>
-        <td><%= ingredient.name %></td>
-        <td><%= ingredient.purchase_container %></td>
-        <td>
-          <% if ingredient.measurement.name == "Quantity" %>
-          <%= ingredient.purchase_quantity.ceil %>
-          <% elsif ingredient.purchase_quantity == ingredient.purchase_quantity.to_i.to_f %>
-          <%= ingredient.purchase_quantity.to_i %>
-          <%= " " + (ingredient.purchase_unit.name).pluralize(ingredient.purchase_quantity.ceil)%>
-          <% else %>
-          <%= ingredient.purchase_quantity %>
-          <%= " " + (ingredient.purchase_unit.name).pluralize(ingredient.purchase_quantity.ceil)%>
-          <% end %>
-        </td>
-        <td><%= ingredient.category.name %></td>
-        <td>
-          <a href="/ingredients/<%= ingredient.id %>" class="btn btn-primary">Show</a>
-          <a href="/ingredients/<%= ingredient.id %>/edit" class="btn btn-warning">Edit</a>
-          <a href="/delete_ingredient/<%= ingredient.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
-        </td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
-</div>
+<!-- End of Category Loop  -->
