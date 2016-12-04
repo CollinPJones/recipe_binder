@@ -7,56 +7,81 @@
 
 <!-- Beginning of Category Loop  -->
 <% @categories.each do |category| %>
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-      <table class="table table-striped table-hover">
-        <tr>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <table class="table table-striped table-hover">
+      <tr>
 
-          <!-- Table Header for Ingredient Name (Displays Category Name) -->
-          <th><h2><%= category.name %></h2></th>
+        <!-- Table Header for Ingredient Name (Displays Category Name) -->
+        <th><h2><%= category.name %></h2></th>
 
-          <!-- Table Header for Purchasable Amount -->
-          <th></th>
+        <!-- Table Header for Purchasable Amount -->
+        <th></th>
 
-          <!-- Table Header for Actions -->
-          <th></th>
-        </tr>
+        <!-- Table Header for Actions -->
+        <th></th>
+      </tr>
 
-        <!-- Beginning of Ingredient Loop -->
-        <% category.ingredients.order("name").each do |ingredient| %>
-        <tr>
-          <td><%= ingredient.name %></td>
-          <td>
-            (Purchasable amount:
-            <% if ingredient.measurement.name == "Quantity" %>
-              <% if ingredient.purchase_quantity.to_i > 1 %>
-                <%= "#{ingredient.purchase_container} of #{ingredient.purchase_quantity.ceil}" %>
-              <% else %>
-                <%= "#{ingredient.purchase_quantity.to_i} #{ingredient.purchase_container}" %>
-              <% end %>
-            <% elsif ingredient.purchase_quantity == ingredient.purchase_quantity.to_i.to_f %>
-              <% if ingredient.purchase_container == ingredient.purchase_unit.name %>
-                <%= "#{ingredient.purchase_quantity.to_i} #{ingredient.purchase_container}"%>
-              <% else %>
-                <%= "#{ingredient.purchase_quantity.to_i} #{ingredient.purchase_unit.name} #{ingredient.purchase_container}"%>
-              <% end %>
-            <% else %>
-              <%= "#{ingredient.purchase_quantity} #{ingredient.purchase_unit.name} #{ingredient.purchase_container}"%>
-            <% end %>
-            )
-          </td>
-          <td>
-            <a href="/ingredients/<%= ingredient.id %>" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></a>
-            <a href="/ingredients/<%= ingredient.id %>/edit" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-            <a href="/delete_ingredient/<%= ingredient.id %>" class="btn btn-danger" rel="nofollow"><i class="fa fa-trash" aria-hidden="true"></i></a>
-          </td>
-        </tr>
-        <% end %>
-        <!-- End of Ingredient Loop -->
+      <!-- Beginning of Ingredient Loop -->
+      <% category.ingredients.order("name").each do |ingredient| %>
+      <tr>
+        <td><%= ingredient.name %></td>
+        <td>
+          (Purchasable amount:
+          <% if ingredient.measurement.name == "Quantity" %>
+          <% if ingredient.purchase_quantity.to_i > 1 %>
+          <%= "#{ingredient.purchase_container} of #{ingredient.purchase_quantity.ceil}" %>
+          <% else %>
+          <%= "#{ingredient.purchase_quantity.to_i} #{ingredient.purchase_container}" %>
+          <% end %>
+          <% elsif ingredient.purchase_quantity == ingredient.purchase_quantity.to_i.to_f %>
+          <% if ingredient.purchase_container == ingredient.purchase_unit.name %>
+          <%= "#{ingredient.purchase_quantity.to_i} #{ingredient.purchase_container}"%>
+          <% else %>
+          <%= "#{ingredient.purchase_quantity.to_i} #{ingredient.purchase_unit.name} #{ingredient.purchase_container}"%>
+          <% end %>
+          <% else %>
+          <%= "#{ingredient.purchase_quantity} #{ingredient.purchase_unit.name} #{ingredient.purchase_container}"%>
+          <% end %>
+          )
+        </td>
+        <td>
+          <a href="/ingredients/<%= ingredient.id %>" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></a>
 
-      </table>
-    </div>
+          <!-- Show Moddl Button -->
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#my<%= ingredient.id %>">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="my<%= ingredient.id %>" tabindex="-1" role="dialog" aria-labelledby="my<%= ingredient.id %>Label">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="my<%= ingredient.id %>Label"><%= ingredient.name %></h4>
+                </div>
+                <div class="modal-body">
+                  test
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <a href="/ingredients/<%= ingredient.id %>/edit" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+          <a href="/delete_ingredient/<%= ingredient.id %>" class="btn btn-danger" rel="nofollow"><i class="fa fa-trash" aria-hidden="true"></i></a>
+        </td>
+      </tr>
+      <% end %>
+      <!-- End of Ingredient Loop -->
+
+    </table>
   </div>
+</div>
 <% end %>
 <!-- End of Category Loop -->
 <div class="row">
