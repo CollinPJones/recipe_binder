@@ -22,7 +22,7 @@ class IngredientsController < ApplicationController
 
     @ingredient.name = params[:name]
     @ingredient.purchase_container = params[:purchase_container]
-    @ingredient.purchase_quanitity = params[:purchase_quanitity]
+    @ingredient.purchase_quantity = params[:purchase_quantity]
     @ingredient.category_id = params[:category_id]
     @ingredient.purchase_measurement_unit_id = params[:purchase_measurement_unit_id]
 
@@ -46,7 +46,7 @@ class IngredientsController < ApplicationController
 
     @ingredient.name = params[:name]
     @ingredient.purchase_container = params[:purchase_container]
-    @ingredient.purchase_quanitity = params[:purchase_quanitity]
+    @ingredient.purchase_quantity = params[:purchase_quantity]
     @ingredient.category_id = params[:category_id]
     @ingredient.purchase_measurement_unit_id = params[:purchase_measurement_unit_id]
 
