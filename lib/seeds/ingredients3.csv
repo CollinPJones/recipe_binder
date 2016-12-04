@@ -1,0 +1,28 @@
+name,purchase_container,purchase_quantity,category,purchase_measurement_unit
+round steak,pound,1,"Meat, Fish & Poultry",pound
+chicken broth,can,14.5,Canned Goods,fluid ounce
+vegetable broth,can,14.5,Canned Goods,fluid ounce
+beef broth,can,14.5,Canned Goods,fluid ounce
+hamburger buns,package,8,Bread & Bakery,each
+hot dog buns,package,8,Bread & Bakery,each
+hot dogs,package,10,"Meat, Fish & Poultry",each
+brauts,package,6,"Meat, Fish & Poultry",each
+ham,pound,1,"Meat, Fish & Poultry",pound
+american cheese (slice),package,24,Dairy & Eggs,each
+macaroni noodles,box,16,Pasta & Rice,ounce
+light beer,can,12,Beverages,fluid ounce
+dark beer,can,12,Beverages,fluid ounce
+honey,bottle,12,Miscellanious,fluid ounce
+shallot,shallot,1,Produce,each
+water chesnuts,can,1.75,Canned Goods,cup
+walnuts (shelled),bag,3.75,Dry Goods,cup
+almonds (whole),bag,3.75,Dry Goods,cup
+almonds (sliced),bag,3.75,Dry Goods,cup
+walnuts (chopped),bag,3.75,Dry Goods,cup
+peperoni,package,3.5,"Meat, Fish & Poultry",ounce
+vinegar,bottle,16,Sauces & Oils,fluid ounce
+heavy whipping cream,pint,1,Dairy & Eggs,pint
+green beans,can,1,Canned Goods,each
+lemon,lemon,1,Produce,each
+lime,lime,1,Produce,each
+cottage cheese,container,16,Dairy & Eggs,fluid ounce
