@@ -18,7 +18,7 @@ class Recipe < ActiveRecord::Base
   has_many :ratings
 
   #Recipe to Bookmark Association
-  has_any :bookmarks
+  has_many :bookmarks
   #----------------
 
 
