@@ -1,7 +1,7 @@
 class IngredientsController < ApplicationController
   def index
     @ingredients = Ingredient.all
-
+    @categories = IngredientCategory.all.order("name")
     render("ingredients/index.html.erb")
   end
 

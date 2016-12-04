@@ -5,5 +5,5 @@ class IngredientCategory < ActiveRecord::Base
 
   #Associations
   #Ingredient Category to Ingredients Associations
-  has_many :ingredients
+  has_many :ingredients, class_name: "Ingredient", foreign_key: "category_id"
 end

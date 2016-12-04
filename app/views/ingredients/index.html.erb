@@ -5,6 +5,60 @@
   </h1>
 </div>
 
+<!-- Beginning of Category Loop  -->
+<% @categories.each do |category| %>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <table class="table table-striped table-hover">
+        <tr>
+
+          <!-- Table Header for Ingredient Name (Displays Category Name) -->
+          <th><h2><%= category.name %></h2></th>
+
+          <!-- Table Header for Purchasable Amount -->
+          <th></th>
+
+          <!-- Table Header for Actions -->
+          <th></th>
+        </tr>
+
+        <!-- Beginning of Ingredient Loop -->
+        <% category.ingredients.order("name").each do |ingredient| %>
+        <tr>
+          <td><%= ingredient.name %></td>
+          <td>
+            (Purchasable amount:
+            <% if ingredient.measurement.name == "Quantity" %>
+              <% if ingredient.purchase_quantity.to_i > 1 %>
+                <%= "#{ingredient.purchase_container} of #{ingredient.purchase_quantity.ceil}" %>
+              <% else %>
+                <%= "#{ingredient.purchase_quantity.to_i} #{ingredient.purchase_container}" %>
+              <% end %>
+            <% elsif ingredient.purchase_quantity == ingredient.purchase_quantity.to_i.to_f %>
+              <% if ingredient.purchase_container == ingredient.purchase_unit.name %>
+                <%= "#{ingredient.purchase_quantity.to_i} #{ingredient.purchase_container}"%>
+              <% else %>
+                <%= "#{ingredient.purchase_quantity.to_i} #{ingredient.purchase_unit.name} #{ingredient.purchase_container}"%>
+              <% end %>
+            <% else %>
+              <%= "#{ingredient.purchase_quantity} #{ingredient.purchase_unit.name} #{ingredient.purchase_container}"%>
+            <% end %>
+            )
+          </td>
+          <td>
+            <a href="/ingredients/<%= ingredient.id %>" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></a>
+            <a href="/ingredients/<%= ingredient.id %>/edit" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+            <a href="/delete_ingredient/<%= ingredient.id %>" class="btn btn-danger" rel="nofollow"><i class="fa fa-trash" aria-hidden="true"></i></a>
+          </td>
+        </tr>
+        <% end %>
+        <!-- End of Ingredient Loop -->
+
+      </table>
+    </div>
+  </div>
+<% end %>
+<!-- End of Category Loop -->
 <div class="row">
   <div class="col-md-12">
     <table class="table table-striped table-hover">
