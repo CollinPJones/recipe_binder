@@ -53,9 +53,18 @@ class IngredientsController < ApplicationController
     save_status = @ingredient.save
 
     if save_status == true
-      redirect_to("/ingredients/#{@ingredient.id}", :notice => "Ingredient updated successfully.")
+      if URI(request.referer).path == "/ingredients/#{@ingredient.id}/edit"
+        redirect_to("/ingredients/#{@ingredient.id}", :notice => "Ingredient updated successfully.")
+      else
+        redirect_to(:back, :notice => "Ingredient updated successfully.")
+      end
     else
       render("ingredients/edit.html.erb")
+      if URI(request.referer).path == "/ingredients/#{@ingredient.id}/edit"
+        render("ingredients/edit.html.erb")
+      else
+        redirect_to(:back, :notice => "Ingredient update unsuccessful.")
+      end
     end
   end
 

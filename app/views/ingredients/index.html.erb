@@ -98,14 +98,12 @@
           </div>
           <!-- End of Show Modal -->
 
-          <a href="/ingredients/<%= ingredient.id %>/edit" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-
           <!-- Edit Modal Button -->
           <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#my<%= ingredient.id %>Edit">
             <i class="fa fa-pencil" aria-hidden="true"></i>
           </button>
 
-          <!-- Modal -->
+          <!-- Edit Modal -->
           <div class="modal fade" id="my<%= ingredient.id %>Edit" tabindex="-1" role="dialog" aria-labelledby="my<%= ingredient.id %>EditLabel">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
@@ -116,80 +114,70 @@
                   </h4>
                 </div>
 
+                <form action="/update_ingredient/<%= ingredient.id %>" method="post">
+                  <div class="modal-body">
 
+                    <!-- Hidden input for authenticity token to protect from forgery -->
+                    <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
-                 <div class="modal-body">
+                    <!-- Label and input for name -->
+                    <div class="form-group">
+                      <label for="name" class="control-label">
+                        Name
+                      </label>
 
-                   <form action="/update_ingredient/<%= ingredient.id %>" method="post">
-                     <!-- Hidden input for authenticity token to protect from forgery -->
-                     <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+                      <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= ingredient.name %>">
+                    </div>
 
-                     <!-- Label and input for name -->
-                     <div class="form-group">
-                       <label for="name" class="control-label">
-                         Name
-                       </label>
+                    <!-- Label and input for purchase_container -->
+                    <div class="form-group">
+                      <label for="purchase_container" class="control-label">
+                        Purchase container
+                      </label>
 
-                       <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= ingredient.name %>">
-                     </div>
+                      <input type="text" id="purchase_container" name="purchase_container" placeholder="Purchase container" class="form-control" value="<%= ingredient.purchase_container %>">
+                    </div>
 
-                     <!-- Label and input for purchase_container -->
-                     <div class="form-group">
-                       <label for="purchase_container" class="control-label">
-                         Purchase container
-                       </label>
+                    <!-- Label and input for purchase_quanitity -->
+                    <div class="form-group">
+                      <label for="purchase_quantity" class="control-label">
+                        Purchase quantity
+                      </label>
 
-                       <input type="text" id="purchase_container" name="purchase_container" placeholder="Purchase container" class="form-control" value="<%= ingredient.purchase_container %>">
-                     </div>
+                      <input type="text" id="purchase_quantity" name="purchase_quantity" placeholder="Purchase quantity" class="form-control" value="<%= ingredient.purchase_quantity %>">
+                    </div>
 
-                     <!-- Label and input for purchase_quanitity -->
-                     <div class="form-group">
-                       <label for="purchase_quantity" class="control-label">
-                         Purchase quantity
-                       </label>
+                    <!-- Label and input for category_id -->
+                    <div class="form-group">
+                      <label for="category_id" class="control-label">
+                        Category
+                      </label>
 
-                       <input type="text" id="purchase_quantity" name="purchase_quantity" placeholder="Purchase quantity" class="form-control" value="<%= ingredient.purchase_quantity %>">
-                     </div>
+                      <input type="text" id="category_id" name="category_id" placeholder="Category" class="form-control" value="<%= ingredient.category_id %>">
+                    </div>
 
-                     <!-- Label and input for category_id -->
-                     <div class="form-group">
-                       <label for="category_id" class="control-label">
-                         Category
-                       </label>
+                    <!-- Label and input for purchase_measurement_unit_id -->
+                    <div class="form-group">
+                      <label for="purchase_measurement_unit_id" class="control-label">
+                        Purchase measurement unit
+                      </label>
 
-                       <input type="text" id="category_id" name="category_id" placeholder="Category" class="form-control" value="<%= ingredient.category_id %>">
-                     </div>
+                      <input type="text" id="purchase_measurement_unit_id" name="purchase_measurement_unit_id" placeholder="Purchase measurement unit" class="form-control" value="<%= ingredient.purchase_measurement_unit_id %>">
+                    </div>
+                  </div>
 
-                     <!-- Label and input for purchase_measurement_unit_id -->
-                     <div class="form-group">
-                       <label for="purchase_measurement_unit_id" class="control-label">
-                         Purchase measurement unit
-                       </label>
-
-                       <input type="text" id="purchase_measurement_unit_id" name="purchase_measurement_unit_id" placeholder="Purchase measurement unit" class="form-control" value="<%= ingredient.purchase_measurement_unit_id %>">
-                     </div>
-
-                     <button class="btn btn-warning">
-                       Update Ingredient
-                     </button>
-                     or
-                     <a href="/ingredients/<%= ingredient.id %>">Cancel</a>
-                   </form>
-
-                </div>
-
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-warning">Save changes</button>
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-
+                  <div class="modal-footer">
+                    <button class="btn btn-warning">
+                      Update Ingredient
+                    </button>
+                    or
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
-
-
-
-
+          <!-- End of Edit Modal -->
 
           <a href="/delete_ingredient/<%= ingredient.id %>" class="btn btn-danger" rel="nofollow"><i class="fa fa-trash" aria-hidden="true"></i></a>
         </td>
