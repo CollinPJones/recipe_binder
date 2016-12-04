@@ -5,7 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   #Validations
   validates :username, presence: true
-
+  #----------------
+  
   #Associations
   #User to Recipes Associations
   has_many :recipes
@@ -15,6 +16,10 @@ class User < ApplicationRecord
 
   #Ties Recipe ratings to User
   has_many :recipe_ratings, through: :recipes, source: :ratings
+
+  #User to Bookmark Association
+  has_many :bookmarks
+  #----------------
 
   def cook_book_rating
     self.recipe_ratings.average("score")

@@ -16,7 +16,11 @@ class Recipe < ActiveRecord::Base
 
   #Recipe to Rating Association
   has_many :ratings
+
+  #Recipe to Bookmark Association
+  has_any :bookmarks
   #----------------
+
 
   def average_rating
     Rating.where(recipe_id: self.id).average("score")
