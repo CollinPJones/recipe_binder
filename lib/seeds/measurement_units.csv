@@ -1,0 +1,15 @@
+name,measurement
+gallon,Volume
+cup,Volume
+pint,Volume
+fluid ounce,Volume
+tablespoon,Volume
+teaspoon,Volume
+liter,Volume
+milliliter,Volume
+pound,Weight
+ounce,Weight
+kilogram,Weight
+gram,Weight
+each,Quantity
+quart,Volume

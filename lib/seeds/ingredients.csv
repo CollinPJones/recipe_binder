@@ -1,0 +1,169 @@
+name,purchase_container,purchase_quantity,category,purchase_measurement_unit
+milk,gallon,1,Dairy & Eggs,gallon
+sour cream,container,16,Dairy & Eggs,fluid ounce
+white wine vinegar,bottle,16,Sauces & Oils,fluid ounce
+worcestershire sauce,bottle,10,Sauces & Oils,fluid ounce
+yeast (dry active),packet,2.25,Dry Goods,teaspoon
+basil (dry),jar,30,Herbs & Spices,teaspoon
+oregano (dry),jar,30,Herbs & Spices,teaspoon
+thyme (dry),jar,30,Herbs & Spices,teaspoon
+turmeric (ground),jar,12.5,Herbs & Spices,teaspoon
+rosemary (dry),jar,30,Herbs & Spices,teaspoon
+dill (dry),jar,30,Herbs & Spices,teaspoon
+cilantro (fresh),bunch,2,Herbs & Spices,cup
+tarragon (dry),jar,30,Herbs & Spices,teaspoon
+chives (dry),jar,30,Herbs & Spices,teaspoon
+cinnamon (ground),jar,30,Herbs & Spices,teaspoon
+nutmeg (ground),jar,12.5,Herbs & Spices,teaspoon
+cumin (ground),jar,30,Herbs & Spices,teaspoon
+paprika (ground),jar,30,Herbs & Spices,teaspoon
+mustard (ground),jar,,Herbs & Spices,teaspoon
+ginger (dry ground),jar,30,Herbs & Spices,teaspoon
+allspice (ground),jar,12.5,Herbs & Spices,teaspoon
+cayenne pepper (ground),jar,30,Herbs & Spices,teaspoon
+yellow mustard,bottle,113,Sauces & Oils,teaspoon
+ketchup,bottle,63,Sauces & Oils,tablespoon
+half and half,pint,1,Dairy & Eggs,pint
+yellow onion,yellow onion,1,Produce,each
+red onion,red onion,1,Produce,each
+banana,banana,1,Produce,each
+almond extract,bottle,2,Herbs & Spices,fluid ounce
+black pepper (ground),tin,49,Herbs & Spices,teaspoon
+bread crumbs,container,3.75,Dry Goods,cup
+vanilla extract,bottle,4,Herbs & Spices,fluid ounce
+peppermint extract,bottle,2,Herbs & Spices,fluid ounce
+mayonnaise,jar,15,Miscellanious,fluid ounce
+lemon juice,bottle,15,Miscellanious,fluid ounce
+lime juice,bottle,15,Miscellanious,fluid ounce
+peanut butter,jar,70,Miscellanious,tablespoon
+parmesan cheese (grated),container,90,Dairy & Eggs,teaspoon
+eggs,carton,12,Dairy & Eggs,each
+tuna (canned),can,0.25,Canned Goods,cup
+garlic (minced),jar,1,Canned Goods,teaspoon
+garlic (clove),head,8,Produce,each
+great northern beans,can,1,Canned Goods,each
+black beans,can,1,Canned Goods,each
+pinto beans,can,1,Canned Goods,each
+kidney beans,can,1,Canned Goods,each
+yogurt (plain),quart,1,Dairy & Eggs,quart
+yogurt (greek),quart,1,Dairy & Eggs,quart
+cream of potato soup,can,1.25,Canned Goods,cup
+cream of mushroom soup,can,1.25,Canned Goods,cup
+cream of celery soup,can,1.25,Canned Goods,cup
+cream of chicken soup,can,1.25,Canned Goods,cup
+flour,bag,18.75,Dry Goods,cup
+coconut (flaked),bag,52,Dry Goods,tablespoon
+powdered sugar,bag,7.5,Dry Goods,cup
+brown sugat,bag,227,Dry Goods,teaspoon
+granulated sugar,bag,454,Dry Goods,teaspoon
+baking powder,can,48,Dry Goods,teaspoon
+baking soda,box,100.75,Dry Goods,teaspoon
+cocoa powder,can,45,Dry Goods,tablespoon
+corn starch,jar,56,Dry Goods,tablespoon
+apple cider vinegar,bottle,32,Sauces & Oils,fluid ounce
+corn syrup,bottle,16,Miscellanious,fluid ounce
+balsamic vinegar,bottle,8.5,Sauces & Oils,fluid ounce
+salt,container,123,Dry Goods,teaspoon
+vegetable oil,bottle,16,Sauces & Oils,fluid ounce
+french fried onions,container,48,Dry Goods,tablespoon
+cheddar cheese (shredded),bag,2,Dairy & Eggs,cup
+parmesan cheese (shredded),bag,2,Dairy & Eggs,cup
+colby jack cheese (shredded),bag,2,Dairy & Eggs,cup
+mozzarella cheese (shredded),bag,2,Dairy & Eggs,cup
+monterey jack cheese (shredded),bag,2,Dairy & Eggs,cup
+oatmeal,container,6.5,Dry Goods,cup
+red wine,bottle,750,Beverages,milliliter
+white wine,bottle,750,Beverages,milliliter
+rum,bottle,750,Beverages,milliliter
+whiskey,bottle,750,Beverages,milliliter
+vodka,bottle,750,Beverages,milliliter
+gin,bottle,750,Beverages,milliliter
+rice,pound,2.5,Pasta & Rice,cup
+lentils,pound,3.5,Dry Goods,cup
+beef (ground),pound,1,"Meat, Fish & Poultry",pound
+turkey (ground),pound,1,"Meat, Fish & Poultry",pound
+chicken (ground),pound,1,"Meat, Fish & Poultry",pound
+turkey (whole),turkey (whole),1,"Meat, Fish & Poultry",each
+chicken (whole),chicken (whole),1,"Meat, Fish & Poultry",each
+chick (breast),pakage,2,"Meat, Fish & Poultry",pound
+butter,stick,0.5,Dairy & Eggs,cup
+taco seasoning packet,taco seasoning packet,1,Herbs & Spices,each
+pie crust,box,2,Miscellanious,each
+shortening,stick,1,Dairy & Eggs,cup
+lamb (ground),pound,1,"Meat, Fish & Poultry",pound
+bacon,pound,1,"Meat, Fish & Poultry",pound
+cream cheese,stick,8,Dairy & Eggs,ounce
+artichoke hearts,can,1,Canned Goods,each
+breakfast sausage,pound,1,"Meat, Fish & Poultry",pound
+italian sausage,pound,1,"Meat, Fish & Poultry",pound
+italian seasoning packet,italian seasoning packet,1,Miscellanious,each
+tabasco sauce,bottle,10,Sauces & Oils,fluid ounce
+cayenne pepper sauce,bottle,10,Sauces & Oils,fluid ounce
+tomato,tomato,1,Produce,each
+tomato paste,can,12,Canned Goods,fluid ounce
+tomato sauce,can,4,Canned Goods,fluid ounce
+diced tomatoes,can,1,Canned Goods,each
+green bell pepper,green bell pepper,1,Produce,each
+red bell pepper,red bell pepper,1,Produce,each
+jalapeno peper,jalapeno peper,1,Produce,each
+habanero peper,habanero peper,1,Produce,each
+blueberries,pint,1,Produce,pint
+strawberries,pint,1,Produce,pint
+raspberries,pint,1,Produce,pint
+blackberries,pint,1,Produce,pint
+hash browns,bag,6,Miscellanious,cup
+crimini mushrooms,package,8,Produce,ounce
+baby carrots,bag,1,Produce,pound
+white mushrooms,package,8,Produce,ounce
+portabella mushrooms,package,8,Produce,ounce
+salmon,pound,1,"Meat, Fish & Poultry",pound
+sirloin steak,pound,1,"Meat, Fish & Poultry",pound
+chuck roast,pound,1,"Meat, Fish & Poultry",pound
+beef tenderloin,pound,1,"Meat, Fish & Poultry",pound
+pork tenderloin,pound,1,"Meat, Fish & Poultry",pound
+rice krispies cereal,box,10,Miscellanious,cup
+bread (slice),loaf,16,Bread & Bakery,each
+shrimp,pound,1,"Meat, Fish & Poultry",pound
+scallop,pound,1,"Meat, Fish & Poultry",pound
+cucumber,cucumber,1,Produce,each
+zucchini,zucchini,1,Produce,each
+cherry tomatoes,package,20,Produce,each
+chocolate cake mix (prepared),box,2,Dry Goods,cup
+olive oil,bottle,24,Sauces & Oils,fluid ounce
+spaghetti noodles,box,16,Pasta & Rice,ounce
+penne noodles,box,16,Pasta & Rice,ounce
+lasagna noodles,box,16,Pasta & Rice,ounce
+ricotta cheese,container,16,Dairy & Eggs,fluid ounce
+water,bottle,1,Beverages,gallon
+orange,orange,1,Produce,each
+orange juice,bottle,59,Beverages,fluid ounce
+apple cider,bottle,0.5,Beverages,gallon
+cherries,bag,2,Produce,pound
+sauerkraut,can,1.75,Canned Goods,cup
+round steak,pound,1,"meat, Fish & Poultry",pound
+chicken broth,can,14.5,Canned Goods,fluid ounce
+vegetable broth,can,14.5,Canned Goods,fluid ounce
+beef broth,can,14.5,Canned Goods,fluid ounce
+hamburger buns,package,8,Bread & Bakery,each
+hot dog buns,package,8,Bread & Bakery,each
+hot dogs,package,10,"Meat, Fish & Poultry",each
+brauts,package,6,"Meat, Fish & Poultry",each
+ham,pound,1,"meat, Fish & Poultry",pound
+american cheese (slice),package,24,Dairy & Eggs,each
+macaroni noodles,box,16,Pasta & Rice,ounce
+light beer,can,12,Beverages,fluid ounce
+dark beer,can,12,Beverages,fluid ounce
+honey,bottle,12,Miscellanious,fluid ounce
+shallot,shallot,1,Produce,each
+water chesnuts,can,1.75,Canned Goods,cup
+walnuts (shelled),bag,3.75,Dry Goods,cup
+almonds (whole),bag,3.75,Dry Goods,cup
+almonds (sliced),bag,3.75,Dry Goods,cup
+walnuts (chopped),bag,3.75,Dry Goods,cup
+peperoni,package,3.5,"Meat, Fish & Poultry",ounce
+vinegar,bottle,16,Sauces & Oils,fluid ounce
+heavy whipping cream,pint,1,Dairy & Eggs,pint
+green beans,can,1,Canned Goods,each
+lemon,lemon,1,Produce,each
+lime,lime,1,Produce,each
+cottage cheese,container,16,Dairy & Eggs,fluid ounce
