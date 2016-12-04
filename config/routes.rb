@@ -3,14 +3,22 @@ Rails.application.routes.draw do
   root "recipes#index"
   #------------------------------
 
-  # Routes for the Direction resource:
+  # Routes for the Bookmark resource:
+  # CREATE
+  post "/create_bookmark", controller: "bookmarks", action: "create"
+
+  # DELETE
+  get "/delete_bookmark/:id", controller: "bookmarks", action: "destroy"
+  #------------------------------
+
+  # Routes for the Rating resource:
   # CREATE
   get "/create_rating/:recipe_id/:user_id/:score", controller: "ratings", action: "create"
 
   #UPDATE
   get "/update_rating/:id/:score", controller: "ratings", action: "update"
   #------------------------------
-  
+
   # Routes for the Direction resource:
   # CREATE
   get "/directions/new", :controller => "directions", :action => "new"
