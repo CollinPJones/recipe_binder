@@ -13,7 +13,6 @@
         <th>Purchase container</th>
         <th>Purchase quantity</th>
         <th>Category</th>
-        <th>Purchase measurement unit</th>
         <th>Actions</th>
       </tr>
 
@@ -21,9 +20,18 @@
       <tr>
         <td><%= ingredient.name %></td>
         <td><%= ingredient.purchase_container %></td>
-        <td><%= ingredient.purchase_quantity %></td>
-        <td><%= ingredient.category_id %></td>
-        <td><%= ingredient.purchase_measurement_unit_id %></td>
+        <td>
+          <% if ingredient.measurement.name == "Quantity" %>
+          <%= ingredient.purchase_quantity.ceil %>
+          <% elsif ingredient.purchase_quantity == ingredient.purchase_quantity.to_i.to_f %>
+          <%= ingredient.purchase_quantity.to_i %>
+          <%= " " + (ingredient.purchase_unit.name).pluralize(ingredient.purchase_quantity.ceil)%>
+          <% else %>
+          <%= ingredient.purchase_quantity %>
+          <%= " " + (ingredient.purchase_unit.name).pluralize(ingredient.purchase_quantity.ceil)%>
+          <% end %>
+        </td>
+        <td><%= ingredient.category.name %></td>
         <td>
           <a href="/ingredients/<%= ingredient.id %>" class="btn btn-primary">Show</a>
           <a href="/ingredients/<%= ingredient.id %>/edit" class="btn btn-warning">Edit</a>
