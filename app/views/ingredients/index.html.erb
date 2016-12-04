@@ -9,21 +9,19 @@
 <% @categories.each do |category| %>
 <div class="container">
   <div class="row">
-    <div class="col-md-offset-2 col-md-8">
+    <div class="col-md-offset-2 col-md-8 bg-primary" style="border-radius: 4px;">
       <h2><%= category.name %></h2>
     </div>
   </div>
-
-  <% category.ingredients.order("name").each do |ingredient| %>
   <div class="row">
     <div class="col-md-offset-2 col-md-8">
-      <hr>
+      <br>
     </div>
   </div>
-
-  <div class="row">
+  <% category.ingredients.order("name").each do |ingredient| %>
+    <div class="row">
     <!-- Ingredient Name -->
-    <div class="col-md-offset-2 col-md-2">
+    <div class="col-md-offset-2 col-md-2 padding-top">
       <%= ingredient.name %>
     </div>
 
@@ -185,6 +183,12 @@
       <a href="/delete_ingredient/<%= ingredient.id %>" class="btn btn-danger btn-sm" rel="nofollow"><i class="fa fa-trash" aria-hidden="true"></i></a>
     </div>
 
+  </div>
+
+  <div class="row">
+    <div class="col-md-offset-2 col-md-8">
+      <hr>
+    </div>
   </div>
   <% end %>
   <!-- End of Ingredients Loop -->
