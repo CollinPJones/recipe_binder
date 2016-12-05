@@ -1,11 +1,11 @@
 <!-- Validation failure messages -->
 <% if @recipe.errors.any? %>
-  <% @recipe.errors.full_messages.each do |message| %>
-    <div class="alert alert-dismissable alert-danger">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <%= message %>
-    </div>
-  <% end %>
+<% @recipe.errors.full_messages.each do |message| %>
+<div class="alert alert-dismissable alert-danger">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <%= message %>
+</div>
+<% end %>
 <% end %>
 
 <div class="page-header">
@@ -72,14 +72,9 @@
         <textarea id="description" name="description" placeholder="Description" class="form-control" rows="3"><%= @recipe.description %></textarea>
       </div>
 
-      <!-- Label and input for user_id -->
-      <div class="form-group">
-        <label for="user_id" class="control-label">
-          User
-        </label>
+      <!-- Input for user_id -->
+      <input type="hidden" id="user_id" name="user_id" value="<%= current_user.id%>">
 
-        <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @recipe.user_id %>">
-      </div>
 
       <!-- Label and input for course_id -->
       <div class="form-group">
