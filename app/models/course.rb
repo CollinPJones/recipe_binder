@@ -6,4 +6,9 @@ class Course < ActiveRecord::Base
   #Associations
   #Course to Recipes Association
   has_many :recipes
+  #---------------
+
+  #Image Uploader
+  mount_uploader :image, ImageUploader
+  #----------------
 end

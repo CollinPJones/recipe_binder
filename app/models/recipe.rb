@@ -21,7 +21,9 @@ class Recipe < ActiveRecord::Base
   has_many :bookmarks
   #----------------
 
-
+  #Image Uploader
+  mount_uploader :image, ImageUploader
+  #----------------
   def average_rating
     Rating.where(recipe_id: self.id).average("score")
   end
