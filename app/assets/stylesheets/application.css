@@ -49,6 +49,7 @@
  .rating > span:hover ~ span:before {
    font-family: FontAwesome;
     content: "\f005";
+    font-size: 15px;
     position: absolute;
     left: 0;
     color: gold;
