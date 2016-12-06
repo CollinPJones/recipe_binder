@@ -118,7 +118,7 @@
     <!-- Label and Input for measurement_units -->
     <div class="col-md-2">
       <div class="form-group">
-        <%= select_tag(:measurement_unit_id, options_from_collection_for_select(MeasurementUnit.all, :id, :name), :class => "form-control") %>
+        <%= select_tag(:measurement_unit_id, options_from_collection_for_select(MeasurementUnit.all, :id, :name), :class => "form-control", include_blank: "Unit") %>
       </div>
     </div>
 
