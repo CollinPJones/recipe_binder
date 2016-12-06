@@ -23,3 +23,37 @@
     <% end  %>
   </div>
 </div>
+
+<br>
+
+<div class="row">
+  <div class="col-md-10 col-md-offset-1" style="text-align: center;">
+    <h1><%= @recipe.name %>    </h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-10 col-md-offset-1" style="text-align: center;">
+    <h2 >
+    <% if @recipe.average_rating == nil %>
+    <font color="grey">
+      <% for i in 1..5 %>
+      <i class="fa fa-star-o" aria-hidden="true"></i>
+      <% end %>
+    </font>
+    <% else %>
+    <font color="gold">
+      <% for i in 1..5 do %>
+        <% if (i.to_f - 0.25) <= @recipe.average_rating %>
+        <i class="fa fa-star" aria-hidden="true"></i>
+        <% elsif  (i.to_f - 0.75) <= @recipe.average_rating %>
+        <i class="fa fa-star-half-o" aria-hidden="true"></i>
+        <% else %>
+        <i class="fa fa-star-o" aria-hidden="true"></i>
+        <% end %>
+      <% end %>
+    </font>
+    <% end %>
+  </h2>
+  </div>
+</div>
