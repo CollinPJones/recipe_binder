@@ -1,99 +1,23 @@
-<div class="page-header">
-  <h1>
-    Recipes
-    <a href="/recipes/new" class="btn btn-lg btn-success">New Recipe</a>
-  </h1>
+<div class="row text-center">
+  <div class="col-md-offset-3 col-md-6">
+          <h2>
+            What would you like to make?
+          </h2>
+    </div>
 </div>
+<br>
 
 <div class="row">
-  <div class="col-md-8 col-md-offset-2">
-    <table class="table table-striped table-hover">
-      <tr>
-        <!--Name Header  -->
-        <th>Name</th>
-        <!-- User Header -->
-        <th>Author</th>
-        <!-- Rating Header -->
-        <th>Rating</th>
-        <!-- Description Header -->
-        <th>Description</th>
-        <!-- Actions Header -->
-        <th>Actions</th>
-      </tr>
-
-      <% @recipes.each do |recipe| %>
-      <tr>
-        <td>
-          <a href="/recipes/<%= recipe.id %>"><%= recipe.name %></a>
-        </td>
-        <td><%= recipe.user.username %></td>
-        <td>
-          <% if recipe.average_rating == nil %>
-            <font color="grey">
-              <% for i in 1..5 do %>
-                <i class="fa fa-star-o fa-lg" aria-hidden="true"></i>
-              <% end %>
-           </font>
-          <% else %>
-            <font color="gold">
-              <% for i in 1..5 do %>
-                <% if (i.to_f - 0.25) <= recipe.average_rating %>
-                  <i class="fa fa-star fa-lg" aria-hidden="true"></i>
-                <% elsif  (i.to_f - 0.75) <= recipe.average_rating %>
-                  <i class="fa fa-star-half-o fa-lg" aria-hidden="true"></i>
-                <% else %>
-                  <i class="fa fa-star-o fa-lg" aria-hidden="true"></i>
-                <% end %>
-              <% end %>
-            </font>
-          <% end %>
-        </td>
-        <td><%= truncate(recipe.description) %></td>
-        <td>
-          <a href="/recipes/<%= recipe.id %>" class="btn btn-primary">Show</a>
-
-          <!-- Book Mark -->
-          <a href="https://www.google.com" class="btn btn-success"><i class="fa fa-bookmark" aria-hidden="true"></i></a>
-          <!-- Edit  -->
-          <a href="/recipes/<%= recipe.id %>/edit" class="btn btn-warning"><i class="fa fa-edit"></i></a>
-
-          <!-- Delete -->
-          <a href="/delete_recipe/<%= recipe.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
-        </td>
-      </tr>
-      <% end %>
-    </table>
+  <div class="col-md-10 col-md-offset-1">
+    <a href="/recipes/new" class="btn btn-default btn-block">
+      <i class="fa fa-plus"></i>
+    </a>
   </div>
 </div>
-<div class="btn btn-success">
-  <i class="fa fa-bookmark" aria-hidden="true"></i>
-</div>
 <br>
-<font color="gold"><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-half-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i></font>
-<br>
-<font color="grey"><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i></font>
-<br>
-<span class="fa-stack fa-lg">
-  <i class="fa fa-square-o fa-stack-2x"></i>
-  <i class="fa fa-bookmark fa-stack-1x"></i>
-</span>
-<br>
-<font color="gold">
-<% b = 4.5 %>
-<% for i in 1..5 do %>
-  <% if (i.to_f - 0.25) <= b %>
-  <i class="fa fa-star fa-lg" aria-hidden="true"></i>
-  <% elsif  (i.to_f - 0.75) <= b %>
-  <i class="fa fa-star-half-o fa-lg" aria-hidden="true"></i>
-  <% else %>
-  <i class="fa fa-star-o fa-lg" aria-hidden="true"></i>
-  <% end %>
-<% end %>
-</font>
-<br>
-<br>
-
 <% @courses.each do |course| %>
+
+<% if @recipes.where(course_id: course.id).count != 0 %>
 <div class="row">
   <div class="col-md-offset-1 col-md-10">
     <a href="/courses/<%= course.id %>">
@@ -111,5 +35,83 @@
     </a>
   </div>
 </div>
-<br>
-<% end %>
+
+
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <hr>
+  </div>
+</div>
+
+
+<% @recipes.where(course_id: course.id).each do |recipe| %>
+<div class="row">
+  <!-- Recipe Name -->
+  <div class="col-md-2 col-md-offset-1">
+    <%= recipe.name %>
+  </div>
+  <!-- Recipe Author -->
+  <div class="col-md-2">
+    <%= "by #{recipe.user.username}" %>
+  </div>
+  <!-- Recipe Rating -->
+  <div class="col-md-2">
+    <% if recipe.average_rating == nil %>
+      <font color="grey">
+        <% for i in 1..5 do %>
+          <i class="fa fa-star-o fa-lg" aria-hidden="true"></i>
+        <% end %>
+     </font>
+    <% else %>
+      <font color="gold">
+        <% for i in 1..5 do %>
+          <% if (i.to_f - 0.25) <= recipe.average_rating %>
+            <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+          <% elsif  (i.to_f - 0.75) <= recipe.average_rating %>
+            <i class="fa fa-star-half-o fa-lg" aria-hidden="true"></i>
+          <% else %>
+            <i class="fa fa-star-o fa-lg" aria-hidden="true"></i>
+          <% end %>
+        <% end %>
+      </font>
+    <% end %>
+  </div>
+  <!-- Recipe description -->
+  <div class="col-md-2">
+    <%= truncate(recipe.description, length: 25, separator: ' ') %>
+  </div>
+  <!-- Recipe Actions-->
+  <div class="col-md-2">
+    <a href="/recipes/<%= recipe.id %>" class="btn btn-primary btn-sm"><i class="fa fa-search" aria-hidden="true"></i></a>
+
+    <!-- Book Mark -->
+    <a href="https://www.google.com" class="btn btn-success btn-sm"><i class="fa fa-bookmark" aria-hidden="true"></i></a>
+    <% if current_user.id == recipe.user.id %>
+    <!-- Edit  -->
+    <a href="/recipes/<%= recipe.id %>/edit" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+
+    <!-- Delete -->
+    <a href="/delete_recipe/<%= recipe.id %>" class="btn btn-danger btn-sm" rel="nofollow"><i class="fa fa-trash" aria-hidden="true"></i></a>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <hr>
+  </div>
+</div>
+<% end %> <!-- End of Recipe Loop -->
+
+<% end %> <!-- End of If statement -->
+
+<% end %> <!-- End of Course Loop -->
+
+
+<div class="rating">
+<span>☆</span>
+<span>☆</span>
+<span>☆</span>
+<span>☆</span>
+<span>☆</span>
+</div>
