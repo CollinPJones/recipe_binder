@@ -1,9 +1,9 @@
 <div class="row text-center">
   <div class="col-md-offset-3 col-md-6">
-          <h2>
-            What would you like to make?
-          </h2>
-    </div>
+    <h2>
+      What would you like to make?
+    </h2>
+  </div>
 </div>
 <br>
 
@@ -57,23 +57,23 @@
   <!-- Recipe Rating -->
   <div class="col-md-2">
     <% if recipe.average_rating == nil %>
-      <font color="grey">
-        <% for i in 1..5 do %>
-          <i class="fa fa-star-o fa-lg" aria-hidden="true"></i>
-        <% end %>
-     </font>
+    <font color="grey">
+      <% for i in 1..5 do %>
+      <i class="fa fa-star-o fa-lg" aria-hidden="true"></i>
+      <% end %>
+    </font>
     <% else %>
-      <font color="gold">
-        <% for i in 1..5 do %>
-          <% if (i.to_f - 0.25) <= recipe.average_rating %>
-            <i class="fa fa-star fa-lg" aria-hidden="true"></i>
-          <% elsif  (i.to_f - 0.75) <= recipe.average_rating %>
-            <i class="fa fa-star-half-o fa-lg" aria-hidden="true"></i>
-          <% else %>
-            <i class="fa fa-star-o fa-lg" aria-hidden="true"></i>
-          <% end %>
-        <% end %>
-      </font>
+    <font color="gold">
+      <% for i in 1..5 do %>
+      <% if (i.to_f - 0.25) <= recipe.average_rating %>
+      <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+      <% elsif  (i.to_f - 0.75) <= recipe.average_rating %>
+      <i class="fa fa-star-half-o fa-lg" aria-hidden="true"></i>
+      <% else %>
+      <i class="fa fa-star-o fa-lg" aria-hidden="true"></i>
+      <% end %>
+      <% end %>
+    </font>
     <% end %>
   </div>
   <!-- Recipe description -->
@@ -82,7 +82,61 @@
   </div>
   <!-- Recipe Actions-->
   <div class="col-md-2">
-    <a href="/recipes/<%= recipe.id %>" class="btn btn-primary btn-sm"><i class="fa fa-search" aria-hidden="true"></i></a>
+
+    <!-- Show Modal Button -->
+    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#recipeModal<%= recipe.id %>">
+      <i class="fa fa-search" aria-hidden="true"></i>
+    </button>
+
+    <!-- Show Modal -->
+    <div class="modal fade" id="recipeModal<%= recipe.id %>" tabindex="-1" role="dialog" aria-labelledby="recipeModal<%= recipe.id %>Label">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="recipeModal<%= recipe.id %>Label">
+              <!-- Recipe Name In Modal Header -->
+              <font style="font-size: 20px;"><%= recipe.name %></font>
+              <!-- Average Rating In Modal Header -->
+              <% if recipe.average_rating == nil %>
+              <font color="grey">
+                <% for i in 1..5 do %>
+                <i class="fa fa-star-o fa-lg" aria-hidden="true"></i>
+                <% end %>
+              </font>
+              <% else %>
+              <font color="gold">
+                <% for i in 1..5 do %>
+                <% if (i.to_f - 0.25) <= recipe.average_rating %>
+                <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+                <% elsif  (i.to_f - 0.75) <= recipe.average_rating %>
+                <i class="fa fa-star-half-o fa-lg" aria-hidden="true"></i>
+                <% else %>
+                <i class="fa fa-star-o fa-lg" aria-hidden="true"></i>
+                <% end %>
+                <% end %>
+              </font>
+              <% end %>
+            </h4>
+          </div>
+          <div class="modal-body">
+            <!-- Recipe Image -->
+            <img src="<%= recipe.image %>" alt="<%= recipe.name %>" class="img-responsive">
+            <br>
+
+            <!-- Author -->
+            <p><%= "Author\: #{recipe.user.username}" %></p>
+
+            <!-- description -->
+            <p style="text-align: justify;"><%= "\"#{recipe.description}\"" %></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <a href="/recipes/<%= recipe.id %>" class="btn btn-primary">View Recipe</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Book Mark -->
     <a href="https://www.google.com" class="btn btn-success btn-sm"><i class="fa fa-bookmark" aria-hidden="true"></i></a>
@@ -109,9 +163,9 @@
 
 
 <div class="rating">
-<span><i class="fa fa-star-o fa-lg" aria-hidden="true"></i></span>
-<span><i class="fa fa-star-o fa-lg" aria-hidden="true"></i></span>
-<span><i class="fa fa-star-o fa-lg" aria-hidden="true"></i></span>
-<span><i class="fa fa-star-o fa-lg" aria-hidden="true"></i></span>
-<span><i class="fa fa-star-o fa-lg" aria-hidden="true"></i></span>
+  <span><i class="fa fa-star-o fa-lg" aria-hidden="true"></i></span>
+  <span><i class="fa fa-star-o fa-lg" aria-hidden="true"></i></span>
+  <span><i class="fa fa-star-o fa-lg" aria-hidden="true"></i></span>
+  <span><i class="fa fa-star-o fa-lg" aria-hidden="true"></i></span>
+  <span><i class="fa fa-star-o fa-lg" aria-hidden="true"></i></span>
 </div>
