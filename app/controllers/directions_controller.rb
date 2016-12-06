@@ -72,8 +72,21 @@ class DirectionsController < ApplicationController
     @ingredient_b = RecipeIngredient.where(recipe_id: @ingredient_a.recipe.id).find_by(step: (@ingredient_a.step + 1))
     @ingredient_a.step = @ingredient_b.step
     @ingredient_b.step = @ingredient_a.step – 1
-    @ingredient_a.save
-    @ingredient_b.save
+
+    save_status_a = @ingredient_a.save
+
+    if save_status_a == true
+      save_status_b = @ingredient_b.save
+      if save_status_b == true
+        save_status == true
+      else
+        save_status = false
+        @ingredient_a.step = @ingredient_a.step -1
+        @ingredient_a.save
+      end
+    else
+      save_status = false
+    end
 
     if save_status == true
       redirect_to(:back, :notice => "Step order updated successfully.")
@@ -87,8 +100,20 @@ class DirectionsController < ApplicationController
     @ingredient_b = RecipeIngredient.where(recipe_id: @ingredient_a.recipe.id).find_by(step: (@ingredient_a.step - 1))
     @ingredient_a.step = @ingredient_b.step
     @ingredient_b.step = @ingredient_a.step + 1
-    @ingredient_a.save
-    @ingredient_b.save
+    save_status_a = @ingredient_a.save
+
+    if save_status_a == true
+      save_status_b = @ingredient_b.save
+      if save_status_b == true
+        save_status == true
+      else
+        save_status = false
+        @ingredient_a.step = @ingredient_a.step + 1
+        @ingredient_a.save
+      end
+    else
+      save_status = false
+    end
 
     if save_status == true
       redirect_to(:back, :notice => "Step order updated successfully.")
