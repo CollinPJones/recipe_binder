@@ -1,10 +1,21 @@
+<br>
+<br>
+<br>
+<div class="row text-center">
+  <div class="col-md-offset-3 col-md-6">
+          <h2>
+            What would you like to make?
+          </h2>
+    </div>
+</div>
+<br>
 <% @courses.each_with_index do |course, index| %>
 <% index = index + 1 %>
 <% if (index%5) ==1 %>
 <div class="row">
   <% end %>
   <% if  (index%5) == 1 %>
-  <div class="col-md-offset-1 col-md-2">
+  <div class="col-md-offset-1 col-md-2 col-sm-4">
     <a href="/courses/<%= course.id %>">
       <div class="course_card" style="background: url(<%= course.image %>) no-repeat center center; background-size: cover;">
         <h3><%= course.name %></h3>
@@ -12,7 +23,7 @@
     </a>
   </div>
   <% else %>
-  <div class="col-md-2">
+  <div class="col-md-2 col-sm-4">
     <a href="/courses/<%= course.id %>">
       <div class="course_card" style="background: url(<%= course.image %>) no-repeat center center; background-size: cover;">
         <h3><%= course.name %></h3>
