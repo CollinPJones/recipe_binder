@@ -60,6 +60,12 @@
   </div>
 </div>
 
+<div class="row">
+  <div class="col-md-8 col-md-offset-2" style="text-align: justify;">
+    <p><%= "\"#{@recipe.description}\'" %></p>
+  </div>
+</div>
+
 
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
@@ -92,7 +98,7 @@
   <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
   <!-- Hidden input for Recipe ID -->
-  <input type="hidden" name="recipe_id" value="<%= @recipe.id %>"
+  <input type="hidden" name="recipe_id" value="<%= @recipe.id %>">
 
 
 
@@ -137,3 +143,62 @@
     <hr>
   </div>
 </div>
+
+<% if @directions.count !=0 %>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <ol>
+      <% @directions.order(:step).each do |direction| %>
+      <li><%= direction.description %></li>
+      <% end %>
+    </ol>
+  </div>
+</div>
+<% end %>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <h3>Add Step</h3>
+  </div>
+</div>
+
+
+
+<!-- Quick add form for descriptions -->
+<form action="/create_direction" method="post">
+  <div class="row">
+  <!-- Hidden input for Authenticity token -->
+  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+  <!-- Hidden input for Recipe ID -->
+  <input type="hidden" name="recipe_id" value="<%= @recipe.id %>">
+
+  <!-- Hidden input for Step -->
+  <% if @directions.count == 0 %>
+  <input type="hidden" name="step" value="<%= 1 %>">
+  <% else %>
+  <input type="hidden" name="step" value="<%= (@directions.count + 1) %>">
+  <% end %>
+
+  <!-- Label and input for description -->
+  <div class="col-md-8 col-md-offset-2">
+    <div class="form-group">
+      <label for="description" class="control-label">
+        Description
+      </label>
+      <textarea id="description" name="description" placeholder="Step Description" class="form-control" rows="3"></textarea>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+      <button class="btn btn-success">
+        Add Step
+      </button>
+  </div>
+</div>
+</form>
+
+<%= @recipe.image %>

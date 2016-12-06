@@ -26,7 +26,7 @@
 
 
 
-<form action="/create_recipe" method="post">
+<form action="/create_recipe" method="post" enctype="multipart/form-data">
 
   <!-- Hidden input for authenticity token to protect from forgery -->
   <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">

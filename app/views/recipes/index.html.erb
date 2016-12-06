@@ -28,7 +28,7 @@
         </td>
         <td><%= recipe.user.username %></td>
         <td>
-          <% if recipe.ratings == nil %>
+          <% if recipe.average_rating == nil %>
             <font color="grey">
               <% for i in 1..5 do %>
                 <i class="fa fa-star-o fa-lg" aria-hidden="true"></i>
@@ -48,7 +48,7 @@
             </font>
           <% end %>
         </td>
-        <td><%= recipe.description.truncate %></td>
+        <td><%= truncate(recipe.description) %></td>
         <td>
           <a href="/recipes/<%= recipe.id %>" class="btn btn-primary">Show</a>
 
