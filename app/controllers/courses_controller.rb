@@ -41,7 +41,7 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
 
     @course.name = params[:name]
-
+    @course.image = params[:image]
     save_status = @course.save
 
     if save_status == true
