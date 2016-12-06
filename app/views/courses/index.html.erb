@@ -1,10 +1,3 @@
-<div class="page-header">
-  <h1>
-    Courses
-    <a href="/courses/new" class="btn btn-lg btn-success">New Course</a>
-  </h1>
-</div>
-
 <% @courses.each_with_index do |course, index| %>
 <% index = index + 1 %>
 <% if (index%5) ==1 %>
@@ -12,41 +5,24 @@
   <% end %>
   <% if  (index%5) == 1 %>
   <div class="col-md-offset-1 col-md-2">
-    <%= course.name %>
+    <a href="/courses/<%= course.id %>">
+      <div class="course_card" style="background: url(<%= course.image %>) no-repeat center center; background-size: cover;">
+        <h3><%= course.name %></h3>
+      </div>
+    </a>
   </div>
   <% else %>
   <div class="col-md-2">
-    <%= course.name %>
+    <a href="/courses/<%= course.id %>">
+      <div class="course_card" style="background: url(<%= course.image %>) no-repeat center center; background-size: cover;">
+        <h3><%= course.name %></h3>
+      </div>
+    </a>
   </div>
   <%end %>
   <% if index == @courses.count %>
 </div>
-  <% elsif (index%5) == 0 %>
+<% elsif (index%5) == 0 %>
 </div>
-  <% end %>
 <% end %>
-
-
-
-
-  <div class="row">
-    <div class="col-md-12">
-      <table class="table table-striped table-hover">
-        <tr>
-          <th>Name</th>
-          <th>Actions</th>
-        </tr>
-
-        <% @courses.each do |course| %>
-        <tr>
-          <td><%= course.name %></td>
-          <td>
-            <a href="/courses/<%= course.id %>" class="btn btn-primary">Show</a>
-            <a href="/courses/<%= course.id %>/edit" class="btn btn-warning">Edit</a>
-            <a href="/delete_course/<%= course.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
-          </td>
-        </tr>
-        <% end %>
-      </table>
-    </div>
-  </div>
+<% end %>
