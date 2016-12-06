@@ -18,7 +18,7 @@ class RecipesController < ApplicationController
     if params[:course_id] != nil
       @recipe.course_id = params[:course_id]
     end
-    
+
     render("recipes/new.html.erb")
   end
 
@@ -72,6 +72,12 @@ class RecipesController < ApplicationController
     end
   end
 
+  def update_part_2
+    @recipe = Recipe.find(params[:id])
+    @ingredients = @recipe.recipe_ingredients
+    @directions = @recipe.directions
+
+  end
   def destroy
     @recipe = Recipe.find(params[:id])
 

@@ -21,6 +21,10 @@ class Recipe < ActiveRecord::Base
   has_many :bookmarks
   #----------------
 
+  #Recipe to Direction Association
+  has_many :directions
+  #----------------
+
   #Image Uploader
   mount_uploader :image, ImageUploader
   #----------------
