@@ -27,9 +27,9 @@ class DirectionsController < ApplicationController
     save_status = @direction.save
 
     if save_status == true
-      redirect_to("/directions/#{@direction.id}", :notice => "Direction created successfully.")
+      redirect_to(:back, :notice => "Direction created successfully.")
     else
-      render("directions/new.html.erb")
+      redirect_to(:back, :notice => "Direction creation unsuccessful.")
     end
   end
 
@@ -49,9 +49,9 @@ class DirectionsController < ApplicationController
     save_status = @direction.save
 
     if save_status == true
-      redirect_to("/directions/#{@direction.id}", :notice => "Direction updated successfully.")
+      redirect_to(:back, :notice => "Direction updated successfully.")
     else
-      render("directions/edit.html.erb")
+      redirect_to(:back, :notice => "Direction update unsuccessful.")
     end
   end
 
@@ -103,7 +103,7 @@ class DirectionsController < ApplicationController
     @ingredient_b.step = @ingredient_a.step + 1
     save_status_a = @ingredient_a.save
 
- # Make sure both Steps A and B are updated successfully
+    # Make sure both Steps A and B are updated successfully
     if save_status_a == true
       save_status_b = @ingredient_b.save
       if save_status_b == true

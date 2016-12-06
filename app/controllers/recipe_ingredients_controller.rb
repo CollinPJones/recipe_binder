@@ -31,7 +31,7 @@ class RecipeIngredientsController < ApplicationController
     if save_status == true
       redirect_to(:back, :notice => "Recipe ingredient created successfully.")
     else
-      redirect_to(:back, :notice => "Recipe ingredient not created.")
+      redirect_to(:back, :notice => "Recipe ingredient creation unsuccessful.")
     end
   end
 
@@ -53,9 +53,9 @@ class RecipeIngredientsController < ApplicationController
     save_status = @recipe_ingredient.save
 
     if save_status == true
-      redirect_to("/recipe_ingredients/#{@recipe_ingredient.id}", :notice => "Recipe ingredient updated successfully.")
+      redirect_to(:back, :notice => "Recipe ingredient updated successfully.")
     else
-      render("recipe_ingredients/edit.html.erb")
+      redirect_to(:back, :notice => "Recipe ingredient update unsuccessful.")
     end
   end
 
