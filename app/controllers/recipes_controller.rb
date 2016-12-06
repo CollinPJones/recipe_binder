@@ -78,12 +78,6 @@ class RecipesController < ApplicationController
     @ingredients = @recipe.recipe_ingredients
     @directions = @recipe.directions
 
-    if URI(request.referer).path == "/create_recipe"
-      @new = true
-    else
-      @new = false
-    end
-
     render("recipes/recipe_second_form.html.erb")
   end
 

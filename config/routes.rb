@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   #Root Route
-  root "recipes#index"
+  root "courses#index"
   #------------------------------
 
   # Routes for the Bookmark resource:

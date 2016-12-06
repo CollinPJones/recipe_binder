@@ -12,15 +12,9 @@
 
 <div class="row">
   <div class= "col-md-10 col-md-offset-1">
-    <% if @new = true %>
-    <div class="jumbotron" style="background: url(<%= @recipe.course.image %>) no-repeat center center; text-align: center; background-size: cover; margin-bottom: 5px;">
-      <h1><span style="color: white;"> Create a New <%= @recipe.course.name.singularize %></span></h1>
-    </div>
-    <% else %>
     <div class="jumbotron" style="background: url(<%= @recipe.course.image %>) no-repeat center center; text-align: center; background-size: cover; margin-bottom: 5px;">
       <h1><span style="color: white;"> Update <%= @recipe.course.name.singularize %></span></h1>
     </div>
-    <% end  %>
   </div>
 </div>
 
