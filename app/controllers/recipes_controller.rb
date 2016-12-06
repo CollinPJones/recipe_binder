@@ -33,7 +33,7 @@ class RecipesController < ApplicationController
     @recipe.description = params[:description]
     @recipe.user_id = params[:user_id]
     @recipe.course_id = params[:course_id]
-
+    @recipe.image = params[:image]
     save_status = @recipe.save
 
     if save_status == true
@@ -62,6 +62,7 @@ class RecipesController < ApplicationController
     @recipe.description = params[:description]
     @recipe.user_id = params[:user_id]
     @recipe.course_id = params[:course_id]
+    @recipe.image = params[:image]
 
     save_status = @recipe.save
 

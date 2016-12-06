@@ -27,23 +27,18 @@
 <br>
 
 <div class="row">
-  <div class="col-md-10 col-md-offset-1" style="text-align: center;">
-    <h1><%= @recipe.name %>    </h1>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-10 col-md-offset-1" style="text-align: center;">
-    <h2 >
-    <% if @recipe.average_rating == nil %>
-    <font color="grey">
-      <% for i in 1..5 %>
-      <i class="fa fa-star-o" aria-hidden="true"></i>
-      <% end %>
-    </font>
-    <% else %>
-    <font color="gold">
-      <% for i in 1..5 do %>
+  <div class="col-md-8 col-md-offset-2" style="text-align: center;">
+    <h1>
+      <%= @recipe.name %>
+      <% if @recipe.average_rating == nil %>
+      <font color="grey">
+        <% for i in 1..5 %>
+        <i class="fa fa-star-o" aria-hidden="true"></i>
+        <% end %>
+      </font>
+      <% else %>
+      <font color="gold">
+        <% for i in 1..5 do %>
         <% if (i.to_f - 0.25) <= @recipe.average_rating %>
         <i class="fa fa-star" aria-hidden="true"></i>
         <% elsif  (i.to_f - 0.75) <= @recipe.average_rating %>
@@ -51,9 +46,93 @@
         <% else %>
         <i class="fa fa-star-o" aria-hidden="true"></i>
         <% end %>
+        <% end %>
+      </font>
       <% end %>
-    </font>
-    <% end %>
-  </h2>
+    </h1>
+    <hr>
   </div>
 </div>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <img src="<%= @recipe.image %>" alt="<%= @recipe.name %>" class="img-responsive">
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <h2>Ingredients</h2>
+    <hr>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <% if @ingredients.count != 0 %>
+    <% @ingredients.each do |ingredient| %>
+    <ul>
+      <li><%= ingredient.ingredient.name %></li>
+    </ul>
+    <% end %>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <h3>Add Ingredient</h3>
+  </div>
+</div>
+
+<form action="/create_recipe_ingredient" method="post">
+  <!-- Hidden input for Authenticity token -->
+  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+  <!-- Hidden input for Recipe ID -->
+  <input type="hidden" name="recipe_id" value="<%= @recipe.id %>"
+
+  <div class="row">
+
+    <!-- Label and Input for Ingredient -->
+    <div class="col-md-2 col-md-offset-2">
+      <div class="form-group">
+        <input list="ingredients" name="ingredient" class="form-control" placeholder="Ingredient">
+        <datalist id="ingredients">
+          <% Ingredient.pluck(:name).each do |ingredient| %>
+          <option value="<%= ingredient %>">
+            <% end %>
+          </datalist>
+        </div>
+      </div>
+
+      <!-- Label and Input for Quantity -->
+      <div class="col-md-2">
+        <div class="form-group">
+          <input type="text" id="quantity" name="quantity" placeholder="Quantity" class="form-control" value="<%= @recipe.cook_time_minutes %>">
+        </div>
+      </div>
+
+      <!-- Label and Input for measurement_units -->
+      <div class="col-md-2">
+        <div class="form-group">
+          <%= select_tag(:measurement_unit_id, options_from_collection_for_select(MeasurementUnit.all, :id, :name), :class => "form-control") %>
+        </div>
+      </div>
+
+      <!-- Action -->
+      <div class="col-md-2">
+        <button class="btn btn-success">
+          <i class="fa fa-plus"></i>
+        </button>
+      </div>
+
+    </div>
+  </form>
+
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <h2>Directions</h2>
+      <hr>
+    </div>
+  </div>

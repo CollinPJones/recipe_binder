@@ -21,7 +21,7 @@ class RecipeIngredientsController < ApplicationController
     @recipe_ingredient = RecipeIngredient.new
 
     @recipe_ingredient.recipe_id = params[:recipe_id]
-    @recipe_ingredient.ingredient_id = params[:ingredient_id]
+    @recipe_ingredient.ingredient_id = Ingredient.find_by(name: params[:ingredient]).id
     @recipe_ingredient.note = params[:note]
     @recipe_ingredient.measurement_unit_id = params[:measurement_unit_id]
     @recipe_ingredient.quantity = params[:quantity]
@@ -29,9 +29,9 @@ class RecipeIngredientsController < ApplicationController
     save_status = @recipe_ingredient.save
 
     if save_status == true
-      redirect_to("/recipe_ingredients/#{@recipe_ingredient.id}", :notice => "Recipe ingredient created successfully.")
+      redirect_to(:back, :notice => "Recipe ingredient created successfully.")
     else
-      render("recipe_ingredients/new.html.erb")
+      redirect_to(:back, :notice => "Recipe ingredient not created.")
     end
   end
 
