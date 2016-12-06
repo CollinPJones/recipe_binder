@@ -7,93 +7,132 @@
 </div>
 <% end %>
 <% end %>
-
-<div class="page-header">
-  <h3>Add Recipe</h3>
-</div>
+<br>
 
 <div class="row">
-  <div class="col-md-12">
-    <form action="/create_recipe" method="post">
-      <!-- Hidden input for authenticity token to protect from forgery -->
-      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+  <div class= "col-md-10 col-md-offset-1">
+    <% if @recipe.course != nil %>
+    <div class="jumbotron" style="background: url(<%= @recipe.course.image %>) no-repeat center center; text-align: center; background-size: cover; margin-bottom: 5px;">
+      <h1><span style="color: white;"> Create a New <%= @recipe.course.name.singularize %></span></h1>
+    </div>
+    <% else %>
+    <div class="jumbotron" style="text-align: center;">
+      <h1>Create a New Recipe</h1>
+    </div>
+    <% end  %>
+  </div>
+</div>
 
-      <!-- Label and input for name -->
+
+
+
+<form action="/create_recipe" method="post">
+
+  <!-- Hidden input for authenticity token to protect from forgery -->
+  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+  <!-- Row for name -->
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <!-- Label and Input for Recipe Name -->
       <div class="form-group">
         <label for="name" class="control-label">
-          Name
+          Recipe Title
         </label>
-
-        <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= @recipe.name %>">
+        <input type="text" id="name" name="name" placeholder="Title" class="form-control" value="<%= @recipe.name %>">
       </div>
+    </div>
+  </div>
 
-      <!-- Label and input for cook_temp -->
-      <div class="form-group">
-        <label for="cook_temp" class="control-label">
-          Cook temp
+  <!-- Label and input for course_id -->
+  <% if @recipe.course_id == nil %>
+  <div class="row">
+    <div class="form-group">
+      <div class="col-md-10 col-md-offset-1">
+        <label for="course_id" class="control-label">
+          Course
         </label>
-
-        <input type="text" id="cook_temp" name="cook_temp" placeholder="Cook temp" class="form-control" value="<%= @recipe.cook_temp %>">
+        <%= select_tag(:course_id, options_from_collection_for_select(Course.all, :id, :name, @recipe.course_id), :class => "form-control") %>
       </div>
-
-      <!-- Label and input for cook_time_hrs -->
-      <div class="form-group">
-        <label for="cook_time_hrs" class="control-label">
-          Cook time hrs
-        </label>
-
-        <input type="text" id="cook_time_hrs" name="cook_time_hrs" placeholder="Cook time hrs" class="form-control" value="<%= @recipe.cook_time_hrs %>">
-      </div>
-
-      <!-- Label and input for cook_time_minutes -->
-      <div class="form-group">
-        <label for="cook_time_minutes" class="control-label">
-          Cook time minutes
-        </label>
-
-        <input type="text" id="cook_time_minutes" name="cook_time_minutes" placeholder="Cook time minutes" class="form-control" value="<%= @recipe.cook_time_minutes %>">
-      </div>
-
+    </div>
+  </div>
+  <% else %>
+  <input type="hidden" id="course_id" name="course_id" value="<%= @recipe.course_id %>">
+  <% end %>
+  
+  <!-- Row for Cook Temperature and Servings -->
+  <div class="row">
+    <div class="col-md-3 col-md-offset-1">
       <!-- Label and input for servings -->
       <div class="form-group">
         <label for="servings" class="control-label">
           Servings
         </label>
-
-        <input type="text" id="servings" name="servings" placeholder="Servings" class="form-control" value="<%= @recipe.servings %>">
+        <input type="text" id="servings" name="servings" placeholder="Number of Servings" class="form-control" value="<%= @recipe.servings %>">
       </div>
+    </div>
+    <div class="col-md-3">
+      <!-- Label and input for cook_temp -->
+      <div class="form-group">
+        <label for="cook_temp" class="control-label">
+          Temperature
+        </label>
+        <input type="text" id="cook_temp" name="cook_temp" placeholder="Temperature (F)" class="form-control" value="<%= @recipe.cook_temp %>">
+      </div>
+    </div>
+    <div class="col-md-2">
+      <!-- Label and input for cook_time_hrs -->
+      <div class="form-group">
+        <label for="cook_time_hrs" class="control-label">
+          Hours
+        </label>
+        <input type="text" id="cook_time_hrs" name="cook_time_hrs" placeholder="Hours" class="form-control" value="<%= @recipe.cook_time_hrs %>">
+      </div>
+    </div>
+    <div class="col-md-2">
+      <!-- Label and input for cook_time_hrs -->
+      <div class="form-group">
+        <label for="cook_time_minutes" class="control-label">
+          Minutes
+        </label>
+        <input type="text" id="cook_time_minutes" name="cook_time_minutes" placeholder="Minutes" class="form-control" value="<%= @recipe.cook_time_minutes %>">
+      </div>
+    </div>
+  </div>
 
+  <!-- Row for Image Upload -->
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <div class="form-group">
+        <label for="Image" class="control-label">
+          Image
+        </label>
+        <input type="file" id="image" name="image" class="form-control" placeholder="Image" value="<%= @recipe.image %>">
+      </div>
+    </div>
+  </div>
+
+  <!-- Row for Description -->
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
       <!-- Label and input for description -->
       <div class="form-group">
         <label for="description" class="control-label">
           Description
         </label>
-
         <textarea id="description" name="description" placeholder="Description" class="form-control" rows="3"><%= @recipe.description %></textarea>
       </div>
+    </div>
+  </div>
 
-      <!-- Input for user_id -->
-      <input type="hidden" id="user_id" name="user_id" value="<%= current_user.id%>">
-
-
-      <!-- Label and input for course_id -->
-      <% if @recipe.course_id == nil %>
-      <div class="form-group">
-        <label for="course_id" class="control-label">
-          Course
-        </label>
-
-        <input type="text" id="course_id" name="course_id" placeholder="Course" class="form-control" value="<%= @recipe.course_id %>">
-      </div>
-      <% else %>
-      <input type="hidden" id="course_id" name="course_id" value="<%= @recipe.course_id %>">
-      <% end %>
-
+  <!-- Row for Actions -->
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
       <button class="btn btn-success">
-        Create Recipe
+        NEXT
       </button>
       or
       <a href="/recipes">Cancel</a>
-    </form>
+    </div>
   </div>
-</div>
+</form>

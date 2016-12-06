@@ -90,3 +90,26 @@
   <% end %>
 <% end %>
 </font>
+<br>
+<br>
+
+<% @courses.each do |course| %>
+<div class="row">
+  <div class="col-md-offset-1 col-md-10">
+    <a href="/courses/<%= course.id %>">
+      <div class="recipe_course_card" style="background: url(<%= course.image %>) no-repeat center center; background-size: cover;">
+        <h2><%= course.name %></h2>
+      </div>
+    </a>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <a href="/recipes/new/<%= course.id %>" class="btn btn-default btn-block">
+      <i class="fa fa-plus"></i>
+    </a>
+  </div>
+</div>
+<br>
+<% end %>
