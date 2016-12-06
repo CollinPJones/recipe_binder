@@ -58,6 +58,7 @@ Rails.application.routes.draw do
   # Routes for the Recipe resource:
   # CREATE
   get "/recipes/new", :controller => "recipes", :action => "new"
+  get "/recipes/new/:course_id", :controller => "recipes", :action => "new"
   post "/create_recipe", :controller => "recipes", :action => "create"
 
   # READ

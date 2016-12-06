@@ -15,7 +15,10 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
-
+    if params[:course_id] != nil
+      @recipe.course_id = params[:course_id]
+    end
+    
     render("recipes/new.html.erb")
   end
 

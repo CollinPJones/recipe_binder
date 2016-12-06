@@ -1,7 +1,15 @@
 <div class="row">
   <div class= "col-md-10 col-md-offset-1">
-    <div class="jumbotron hover" style="background: url(<%= @course.image %>) no-repeat center center; background-size: cover;">
+    <div class="jumbotron hover" style="background: url(<%= @course.image %>) no-repeat center center; background-size: cover; margin-bottom: 5px;">
       <h1><span style="color: white;"><%= @course.name %></span></h1>
     </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <a href="/recipes/new/<%= @course.id %>" class="btn btn-default btn-block">
+      <i class="fa fa-plus"></i>
+    </a>
   </div>
 </div>
