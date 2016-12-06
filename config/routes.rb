@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   # Routes for the Bookmark resource:
   # CREATE
-  post "/create_bookmark", controller: "bookmarks", action: "create"
+  get "/create_bookmark/:recipe_id/:user_id", controller: "bookmarks", action: "create"
 
   # DELETE
   get "/delete_bookmark/:id", controller: "bookmarks", action: "destroy"

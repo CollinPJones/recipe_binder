@@ -138,8 +138,12 @@
       </div>
     </div>
 
-    <!-- Book Mark -->
-    <a href="https://www.google.com" class="btn btn-success btn-sm"><i class="fa fa-bookmark" aria-hidden="true"></i></a>
+    <!-- Like button and form -->
+    <% if current_user.bookmarks.find_by(recipe_id: recipe.id) == nil %>
+    <a href="/create_bookmark/<%= recipe.id %>/<%= current_user.id %>" class="btn btn-success btn-sm"><i class="fa fa-bookmark-o" aria-hidden="true"></i></a>
+    <% else %>
+    <a href="/delete_bookmark/<%= current_user.bookmarks.find_by(recipe_id: recipe.id).id %>" class="btn btn-success btn-sm"><i class="fa fa-bookmark" aria-hidden="true"></i></a>
+    <% end %>
     <% if current_user.id == recipe.user.id %>
     <!-- Edit  -->
     <a href="/recipes/<%= recipe.id %>/edit" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
