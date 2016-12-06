@@ -75,6 +75,7 @@ class DirectionsController < ApplicationController
 
     save_status_a = @ingredient_a.save
 
+    # Make sure both Steps A and B are updated successfully
     if save_status_a == true
       save_status_b = @ingredient_b.save
       if save_status_b == true
@@ -102,6 +103,7 @@ class DirectionsController < ApplicationController
     @ingredient_b.step = @ingredient_a.step + 1
     save_status_a = @ingredient_a.save
 
+ # Make sure both Steps A and B are updated successfully
     if save_status_a == true
       save_status_b = @ingredient_b.save
       if save_status_b == true
