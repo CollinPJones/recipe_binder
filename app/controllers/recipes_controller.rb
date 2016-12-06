@@ -37,7 +37,7 @@ class RecipesController < ApplicationController
     save_status = @recipe.save
 
     if save_status == true
-      redirect_to("/recipes/#{@recipe.id}", :notice => "Recipe created successfully.")
+      redirect_to("/recipe_second_form/#{@recipe.id}", :notice => "Recipe created successfully.")
     else
       render("recipes/new.html.erb")
     end
@@ -66,18 +66,26 @@ class RecipesController < ApplicationController
     save_status = @recipe.save
 
     if save_status == true
-      redirect_to("/recipes/#{@recipe.id}", :notice => "Recipe updated successfully.")
+      redirect_to("/recipe_second_form/#{@recipe.id}", :notice => "Recipe updated successfully.")
     else
       render("recipes/edit.html.erb")
     end
   end
 
-  def update_part_2
+  def second_form
     @recipe = Recipe.find(params[:id])
     @ingredients = @recipe.recipe_ingredients
     @directions = @recipe.directions
 
+    if URI(request.referer).path == "/create_recipe"
+      @new = true
+    else
+      @new = false
+    end
+
+    render("recipes/recipe_second_form.html.erb")
   end
+
   def destroy
     @recipe = Recipe.find(params[:id])
 

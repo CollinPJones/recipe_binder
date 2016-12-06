@@ -68,6 +68,7 @@ Rails.application.routes.draw do
   # UPDATE
   get "/recipes/:id/edit", :controller => "recipes", :action => "edit"
   post "/update_recipe/:id", :controller => "recipes", :action => "update"
+  get "/recipe_second_form/:id", controller: "recipes", action: "second_form"
 
   # DELETE
   get "/delete_recipe/:id", :controller => "recipes", :action => "destroy"
