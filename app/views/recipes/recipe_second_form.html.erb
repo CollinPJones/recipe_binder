@@ -51,13 +51,14 @@
     <img src="<%= @recipe.image %>" alt="<%= @recipe.name %>" class="img-responsive">
   </div>
 </div>
-
+<br>
 <div class="row">
   <div class="col-md-8 col-md-offset-2" style="text-align: justify;">
+    <p><%= "Autor\: #{@recipe.user.username}" %></p>
     <p><%= "\"#{@recipe.description}\"" %></p>
   </div>
 </div>
-
+<br>
 
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
@@ -109,7 +110,7 @@
     <!-- Label and Input for Quantity -->
     <div class="col-md-2">
       <div class="form-group">
-        <input type="text" id="quantity" name="quantity" placeholder="Quantity" class="form-control" value="<%= @recipe.cook_time_minutes %>">
+        <input type="text" id="quantity" name="quantity" placeholder="Quantity" class="form-control">
       </div>
     </div>
 

@@ -49,36 +49,31 @@
 </div>
 <br>
 
+
 <div class="row">
-  <div class="col-md-8 col-md-offset-2">
+  <div class="col-md-3 col-md-offset-2">
     <font style="font-size: 20px; font-weight: 200">
-      <% if @recipe.servings != nil %>
-      <%= "#{@recipe.servings} #{"serving".pluralize(@recipe.servings)} " %>
+      Servings:<%= @recipe.servings %>
+    </font>
+  </div>
+  <div class="col-md-3">
+    <font style="font-size: 20px; font-weight: 200">
+      Temperature: <%= @recipe.cook_temp %>
+    </font>
+  </div>
+  <div class="col-md-2">
+    <font style="font-size: 20px; font-weight: 200">
+      Time:
+      <% if @recipe.cook_time_hrs != nil %>
+      <% if @recipe.cook_time_minutes != nil %>
+        <%= "#{@recipe.cook_time_hrs} hr #{@recipe.cook_time_minutes} min" %>
+      <% else %>
+        <%= "#{@recipe.cook_time_hrs} hr" %>
       <% end %>
-
-      <% if @recipe.cook_temp != nil %>
-      <%= "Temperature\: #{@recipe.cook_temp} (F) " %>
+      <% elsif @recipe.cook_time_minutes != nil %>
+        <%= "#{@recipe.cook_time_minutes} min" %>
       <% end %>
     </font>
-
-    <% if @recipe.cook_time_hrs != nil %>
-    <% if @recipe.cook_time_minutes != nil %>
-    <font style="font-size: 20px; font-weight: 200">
-      <%= "#{@recipe.cook_time_hrs} hr #{@recipe.cook_time_minutes} m" %>
-    </font>
-    <i class="fa fa-clock-o" aria-hidden="true"></i>
-    <% else %>
-    <font style="font-size: 20px; font-weight: 200">
-      <%= "#{@recipe.cook_time_hrs} hr" %>
-    </font>
-    <i class="fa fa-clock-o" aria-hidden="true"></i>
-    <% end %>
-    <% elsif @recipe.cook_time_minutes != nil %>
-    <font style="font-size: 20px; font-weight: 200">
-      <%= "#{@recipe.cook_time_minutes} m" %>
-    </font>
-    <i class="fa fa-clock-o" aria-hidden="true"></i>
-    <% end %>
   </div>
 </div>
 <br>
@@ -90,6 +85,23 @@
   </div>
 </div>
 
+
+<% if @ingredients.count != 0 %>
+
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <ul>
+      <% @ingredients.each do |ingredient| %>
+      <li><%= "#{ingredient.quantity} #{ingredient.measurement_unit.name.pluralize(ingredient.quantity.ceil)} of #{ingredient.ingredient.name}" %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<% end %>
+
+
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
     <h3>Directions</h3>
@@ -97,16 +109,17 @@
   </div>
 </div>
 
-<% if @recipe.directions.count !=0 %>
+<% if @directions.count !=0 %>
+<% @directions.each do |direction| %>
 <div class="row">
-  <div class="col-md-8 col-md-offset-2">
-    <ol>
-      <% @recipe.directions.order(:step).each do |direction| %>
-      <li><%= direction.description %></li>
-      <% end %>
-    </ol>
+  <div class="col-md-1 col-md-offset-2" style="text-align: right;">
+    <font style="font-weight: 300"><%= "#{direction.step}." %></font>
+  </div>
+  <div class="col-md-6">
+    <%= direction.description %>
   </div>
 </div>
+<% end %>
 <% end %>
 <br>
 
@@ -118,23 +131,23 @@
     <% else %>
     <font style="font-size: 20px; font-weight: 200"><%= "Your Rating: " %></font>
     <% end %>
-  <% if @recipe.ratings.find_by(user_id: current_user.id) == nil %>
-      <% for i in 1..5 %>
-        <a href="/create_rating/<%= @recipe.id %>/<%= current_user.id %>/<%= i.to_f %>">
-          <i class="fa fa-star-o fa-lg" aria-hidden="true"></i>
-        </a>
-      <% end %>
-  <% else %>
+    <% if @recipe.ratings.find_by(user_id: current_user.id) == nil %>
+    <% for i in 1..5 %>
+    <a href="/create_rating/<%= @recipe.id %>/<%= current_user.id %>/<%= i %>">
+      <i class="fa fa-star-o fa-lg" aria-hidden="true"></i>
+    </a>
+    <% end %>
+    <% else %>
     <font color="gold">
       <% for i in 1..5 %>
       <% if i.to_f <= @recipe.ratings.find_by(user_id: current_user.id).score %>
-        <a href="/update_rating/<%= @recipe.ratings.find_by(user_id: current_user.id).id %>/<%= i.to_f %>">
-          <i class="fa fa-star fa-lg" aria-hidden="true"></i>
-        </a>
+      <a href="/update_rating/<%= @recipe.ratings.find_by(user_id: current_user.id).id %>/<%= i %>">
+        <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+      </a>
       <% else %>
-        <a href="/update_rating/<%= @recipe.ratings.find_by(user_id: current_user.id).id %>/<%= i.to_f %>">
-          <i class="fa fa-star-o fa-lg" aria-hidden="true"></i>
-        </a>
+      <a href="/update_rating/<%= @recipe.ratings.find_by(user_id: current_user.id).id %>/<%= i %>">
+        <i class="fa fa-star-o fa-lg" aria-hidden="true"></i>
+      </a>
       <% end %>
       <% end %>
     </font>

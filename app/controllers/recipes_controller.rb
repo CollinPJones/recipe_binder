@@ -5,6 +5,19 @@ class RecipesController < ApplicationController
     render("recipes/index.html.erb")
   end
 
+  def user_recipes
+    @user = User.find_by(id: params[:user_id])
+    if @user.id == current_user.id
+      @title = "My Recipes"
+    else
+      @title = "#{@user.username}\'s Recipes"
+    end
+
+    @recipes = Recipe.where(user_id: current_user.id)
+    @courses = Course.all.order("name")
+    render("recipes/index_alternate.html.erb")
+  end
+
   def show
     @recipe = Recipe.find(params[:id])
     @ingredients = @recipe.recipe_ingredients

@@ -6,7 +6,7 @@ class User < ApplicationRecord
   #Validations
   validates :username, presence: true
   #----------------
-  
+
   #Associations
   #User to Recipes Associations
   has_many :recipes
@@ -22,6 +22,11 @@ class User < ApplicationRecord
   #----------------
 
   def cook_book_rating
-    self.recipe_ratings.average("score")
+    if self.recipe_ratings.count !=0
+      self.recipe_ratings.average("score").round(2)
+    else
+      self.recipe_ratings.average("score")
+    end
+
   end
 end

@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   # CREATE
   get "/create_bookmark/:recipe_id/:user_id", controller: "bookmarks", action: "create"
 
+  # READ
+  get "/my_bookmarks", controller: "bookmarks", action: "index"
+
   # DELETE
   get "/delete_bookmark/:id", controller: "bookmarks", action: "destroy"
   #------------------------------
@@ -64,6 +67,7 @@ Rails.application.routes.draw do
   # READ
   get "/recipes", :controller => "recipes", :action => "index"
   get "/recipes/:id", :controller => "recipes", :action => "show"
+  get "/user_recipes/:user_id", :controller => "recipes", :action => "user_recipes"
 
   # UPDATE
   get "/recipes/:id/edit", :controller => "recipes", :action => "edit"

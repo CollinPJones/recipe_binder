@@ -1,5 +1,9 @@
 class BookmarksController < ApplicationController
 
+  def index
+    @bookmarks = Bookmark.where(user_id: current_user.id)
+    render("bookmarks/index.html.erb")
+  end
   def create
     @bookmark = Bookmark.new
     @bookmark.user_id = params[:user_id]

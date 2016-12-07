@@ -1,24 +1,33 @@
 <div class="row text-center">
   <div class="col-md-offset-3 col-md-6">
     <h2>
-      What would you like to make?
+      <%= @title %>
+      <%= current_user.id %>
+      <%= User.find_by(id: current_user.id).username %>
     </h2>
   </div>
 </div>
 <br>
-
+<% if @title == "My Recipes" %>
 <div class="row">
   <div class="col-md-10 col-md-offset-1">
-    <a href="/recipes/new" class="btn btn-primary btn-block">
-      Create a New Recipe
+    <a href="/recipes/new" class="btn btn-default btn-block">
+      <i class="fa fa-plus"></i>
     </a>
   </div>
 </div>
 <br>
+<% end  %>
+
+
+
+
+
 
 <% @courses.each do |course| %>
 
-<% if course.recipes.count != 0 %>
+<% if @recipes.where(course_id: course.id).any? %>
+
 <div class="row">
   <div class="col-md-offset-1 col-md-10">
     <a href="/courses/<%= course.id %>">
@@ -28,6 +37,7 @@
     </a>
   </div>
 </div>
+
 
 <div class="row">
   <div class="col-md-10 col-md-offset-1">
@@ -45,7 +55,7 @@
 </div>
 
 
-<% course.recipes.each do |recipe| %>
+<% @recipes.where(course_id: course.id).each do |recipe| %>
 <div class="row">
   <!-- Recipe Name -->
   <div class="col-md-2 col-md-offset-1">
@@ -53,7 +63,7 @@
   </div>
   <!-- Recipe Author -->
   <div class="col-md-2">
-    <a href="/user_recipes/<%= recipe.user.id %>"> <%= "by #{recipe.user.username}" %></a>
+    <%= "by #{recipe.user.username}" %>
   </div>
   <!-- Recipe Rating -->
   <div class="col-md-2">

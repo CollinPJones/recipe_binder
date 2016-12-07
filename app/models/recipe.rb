@@ -29,6 +29,10 @@ class Recipe < ActiveRecord::Base
   mount_uploader :image, ImageUploader
   #----------------
   def average_rating
-    Rating.where(recipe_id: self.id).average("score")
+    if Rating.where(recipe_id: self.id).average("score") != nil
+      Rating.where(recipe_id: self.id).average("score").round(2)
+    else
+      Rating.where(recipe_id: self.id).average("score")
+    end
   end
 end

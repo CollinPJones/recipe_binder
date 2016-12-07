@@ -3,7 +3,7 @@ class RatingsController < ApplicationController
     @rating = Rating.new
     @rating.user_id = params[:user_id]
     @rating.recipe_id = params[:recipe_id]
-    @rating.score = params[:score]
+    @rating.score = params[:score].to_f.round(0)
     save_status = @rating.save
 
     if save_status == true
@@ -15,7 +15,7 @@ class RatingsController < ApplicationController
 
   def update
     @rating = Rating.find_by(params[:id])
-    @rating.score = params[:score]
+    @rating.score = params[:score].to_f.round(0)
     save_status = @rating.save
 
     if save_status == true
