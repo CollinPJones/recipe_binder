@@ -87,18 +87,21 @@
 
 
 <% if @ingredients.count != 0 %>
-
-
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
     <ul>
       <% @ingredients.each do |ingredient| %>
+      <% if ingredient.measurement_unit.name == "each" %>
+      <li><%= "#{ingredient.quantity.to_i} #{ingredient.ingredient.name.pluralize(ingredient.quantity.to_i)}" %></li>
+      <% elsif ingredient.quantity.ceil == ingredient.quantity.to_i%>
+      <li><%= "#{ingredient.quantity.to_i} #{ingredient.measurement_unit.name.pluralize(ingredient.quantity.to_i)} of #{ingredient.ingredient.name}" %></li>
+      <% else %>
       <li><%= "#{ingredient.quantity} #{ingredient.measurement_unit.name.pluralize(ingredient.quantity.ceil)} of #{ingredient.ingredient.name}" %></li>
+      <% end %>
       <% end %>
     </ul>
   </div>
 </div>
-
 <% end %>
 
 

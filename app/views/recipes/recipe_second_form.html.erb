@@ -95,17 +95,87 @@
   </div>
 </div>
 
+<% if @ingredients.count != 0 %>
+<% @ingredients.each do |ingredient| %>
 <div class="row">
-  <div class="col-md-8 col-md-offset-2">
-    <% if @ingredients.count != 0 %>
-    <% @ingredients.each do |ingredient| %>
-    <ul>
-      <li><%= ingredient.ingredient.name %></li>
-    </ul>
-    <% end %>
+  <div class="col-md-5 col-md-offset-3">
+    <% if ingredient.measurement_unit.name == "each" %>
+    <%= "#{ingredient.quantity.to_i} #{ingredient.ingredient.name.pluralize(ingredient.quantity.to_i)}" %>
+    <% elsif ingredient.quantity.ceil == ingredient.quantity.to_i%>
+    <%= "#{ingredient.quantity.to_i} #{ingredient.measurement_unit.name.pluralize(ingredient.quantity.to_i)} of #{ingredient.ingredient.name}" %>
+    <% else %>
+    <%= "#{ingredient.quantity} #{ingredient.measurement_unit.name.pluralize(ingredient.quantity.ceil)} of #{ingredient.ingredient.name}" %>
     <% end %>
   </div>
+  <div class="col-md-2">
+    <!-- Edit  -->
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#<%= ingredient.id %>Modal">
+      <i class="fa fa-edit"></i>
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="<%= ingredient.id %>Modal" tabindex="-1" role="dialog" aria-labelledby="<%= ingredient.id %>ModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="<%= ingredient.id %>ModalLabel"><%= "#{@recipe.name}\: #{ingredient.ingredient.name}" %></h4>
+          </div>
+          <form action="/update_recipe_ingredient/<%= ingredient.id %>" method="post">
+            <div class="modal-body">
+
+              <!-- Hidden input for authenticity token to protect from forgery -->
+              <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+              <!-- Hidden input for recipe_id -->
+              <input name="recipe_id" type="hidden" value="<%= @recipe.id %>">
+
+              <!-- Hidden input for ingredient_id -->
+              <input name="ingredient_id" type="hidden" value="<%= ingredient.ingredient_id %>">
+
+              <!-- Input for Quantity -->
+              <div class="form-group">
+                <label for="quantity" class="control-label">
+                  Quantity
+                </label>
+                <input type="text" id="quantity" name="quantity" placeholder="Quantity" class="form-control" vlaue="<%= ingredient.quantity %>">
+              </div>
+
+              <!-- Input for Measurement Unit -->
+              <div class="form-group">
+                <label for="measurement_unit_id" class="control-label">
+                  Measurement
+                </label>
+                <%= select_tag(:measurement_unit_id, options_from_collection_for_select(MeasurementUnit.all, :id, :name, ingredient.measurement_unit_id), :class => "form-control", include_blank: "Unit") %>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-warning">
+                Update Ingredient
+              </button>
+              or
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete -->
+    <a href="/delete_recipe_ingredient/<%= ingredient.id %>" class="btn btn-danger btn-sm" rel="nofollow"><i class="fa fa-trash" aria-hidden="true"></i></a>
+  </div>
 </div>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <br>
+  </div>
+</div>
+
+<% end %>
+<% end %>
 
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
@@ -195,7 +265,7 @@
               <h4 class="modal-title" id="<%= direction.id %>ModalLabel">Step <%= direction.step %></h4>
             </div>
             <form action="/update_direction/<%= direction.id %>" method="post">
-            <div class="modal-body">
+              <div class="modal-body">
 
                 <!-- Hidden input for authenticity token to protect from forgery -->
                 <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
@@ -217,14 +287,14 @@
 
 
 
-            </div>
-            <div class="modal-footer">
-              <button class="btn btn-warning">
-                Update Direction
-              </button>
-              or
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-warning">
+                  Update Direction
+                </button>
+                or
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
             </form>
           </div>
         </div>
