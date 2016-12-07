@@ -21,10 +21,10 @@
 
       <% @recipe_ingredients.each do |recipe_ingredient| %>
       <tr>
-        <td><%= recipe_ingredient.recipe_id %></td>
-        <td><%= recipe_ingredient.ingredient_id %></td>
+        <td><%= recipe_ingredient.recipe.name %></td>
+        <td><%= recipe_ingredient.ingredient.name %></td>
         <td><%= recipe_ingredient.note %></td>
-        <td><%= recipe_ingredient.measurement_unit_id %></td>
+        <td><%= recipe_ingredient.measurement_unit.name %></td>
         <td><%= recipe_ingredient.quantity %></td>
         <td>
           <a href="/recipe_ingredients/<%= recipe_ingredient.id %>" class="btn btn-primary">Show</a>

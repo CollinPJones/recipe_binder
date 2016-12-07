@@ -17,7 +17,7 @@
       <% @measurement_units.each do |measurement_unit| %>
       <tr>
         <td><%= measurement_unit.name %></td>
-        <td><%= measurement_unit.measurement_id %></td>
+        <td><%= measurement_unit.measurement.name %></td>
         <td>
           <a href="/measurement_units/<%= measurement_unit.id %>" class="btn btn-primary">Show</a>
           <a href="/measurement_units/<%= measurement_unit.id %>/edit" class="btn btn-warning">Edit</a>

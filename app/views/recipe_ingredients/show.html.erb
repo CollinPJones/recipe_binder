@@ -6,16 +6,16 @@
   <div class="col-md-12 mb-2">
     <dl class="dl-horizontal">
       <dt>Recipe</dt>
-      <dd><%= @recipe_ingredient.recipe_id %></dd>
+      <dd><%= @recipe_ingredient.recipe.name%></dd>
 
       <dt>Ingredient</dt>
-      <dd><%= @recipe_ingredient.ingredient_id %></dd>
+      <dd><%= @recipe_ingredient.ingredient.name%></dd>
 
       <dt>Note</dt>
       <dd><%= @recipe_ingredient.note %></dd>
 
       <dt>Measurement unit</dt>
-      <dd><%= @recipe_ingredient.measurement_unit_id %></dd>
+      <dd><%= @recipe_ingredient.measurement_unit.name %></dd>
 
       <dt>Quantity</dt>
       <dd><%= @recipe_ingredient.quantity %></dd>

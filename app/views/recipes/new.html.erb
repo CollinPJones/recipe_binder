@@ -55,7 +55,7 @@
         <label for="course_id" class="control-label">
           Course
         </label>
-        <%= select_tag(:course_id, options_from_collection_for_select(Course.all, :id, :name, @recipe.course_id), :class => "form-control") %>
+        <%= select_tag(:course_id, options_from_collection_for_select(Course.all, :id, :name, @recipe.course_id), :class => "form-control", include_blank: "Course" ) %>
       </div>
     </div>
   </div>
