@@ -57,8 +57,15 @@ class DirectionsController < ApplicationController
 
   def destroy
     @direction = Direction.find(params[:id])
-
+    recipe = @direction.recipe_id
     @direction.destroy
+    directions = Direction.where(recipe_id: recipe)
+
+    directions.order("step").each_with_index do |d, index|
+      step = index + 1
+      d.step = step
+      d.save
+    end
 
     if URI(request.referer).path == "/directions/#{@direction.id}"
       redirect_to("/", :notice => "Direction deleted.")
@@ -90,7 +97,6 @@ class DirectionsController < ApplicationController
     else
       save_status = false
     end
-
     if save_status == true
       redirect_to(:back, :notice => "Step order updated successfully.")
     else

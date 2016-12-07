@@ -4,6 +4,7 @@ class BookmarksController < ApplicationController
     @bookmarks = Bookmark.where(user_id: current_user.id)
     render("bookmarks/index.html.erb")
   end
+
   def create
     @bookmark = Bookmark.new
     @bookmark.user_id = params[:user_id]
@@ -19,6 +20,7 @@ class BookmarksController < ApplicationController
 
   def destroy
     @bookmark = Bookmark.find_by(params[:id])
+    
     @bookmark.destroy
 
     redirect_to(:back, :notice => "Bookmark deleted.")
