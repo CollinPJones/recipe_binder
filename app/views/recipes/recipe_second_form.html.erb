@@ -138,16 +138,26 @@
 </div>
 
 <% if @directions.count !=0 %>
+<% @directions.order(:step).each do |direction| %>
 <div class="row">
-  <div class="col-md-8 col-md-offset-2">
-    <ol>
-      <% @directions.order(:step).each do |direction| %>
-      <li><%= direction.description %></li>
-      <% end %>
-    </ol>
+  <div class="col-md-1 col-md-offset-2" style="text-align: right;">
+    <font style="font-weight: 300"><%= "Step #{direction.step}" %></font>
+  </div>
+  <div class="col-md-5">
+    <%= direction.description %>
+  </div>
+  <div class="col-md-2">
+    <% if direction.step !=  @directions.order(:step).first.step %>
+    <a href="/step_down_direction/<%= direction.id %>" class="btn btn-default btn-sm"><i class="fa fa-chevron-down" aria-hidden="true"></i></i></a>
+    <% end %>
+    <% if direction.step != @directions.order(:step).last.step%>
+    <a href="/step_up_direction/<%= direction.id %>" class="btn btn-default btn-sm"><i class="fa fa-chevron-up" aria-hidden="true"></i></i></a>
+    <% end %>
   </div>
 </div>
 <% end %>
+<% end %>
+<br>
 
 <div class="row">
   <div class="col-md-8 col-md-offset-2">

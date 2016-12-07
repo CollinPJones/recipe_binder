@@ -68,22 +68,24 @@ class DirectionsController < ApplicationController
   end
 
   def step_up
-    @ingredient_a = RecipeIngredient.find_by(params[:id])
-    @ingredient_b = RecipeIngredient.where(recipe_id: @ingredient_a.recipe.id).find_by(step: (@ingredient_a.step + 1))
-    @ingredient_a.step = @ingredient_b.step
-    @ingredient_b.step = @ingredient_a.step – 1
-
-    save_status_a = @ingredient_a.save
+    @step_a = Direction.find_by(id: params[:id])
+    directions = Direction.where(recipe_id: @step_a.recipe_id)
+    @step_b = directions.find_by(step: (@step_a.step + 1))
+    a_s = @step_a.step
+    b_s = @step_b.step
+    @step_a.step = b_s
+    @step_b.step = a_s
+    save_status_a = @step_a.save
 
     # Make sure both Steps A and B are updated successfully
     if save_status_a == true
-      save_status_b = @ingredient_b.save
+      save_status_b = @step_b.save
       if save_status_b == true
-        save_status == true
+        save_status = true
       else
         save_status = false
-        @ingredient_a.step = @ingredient_a.step -1
-        @ingredient_a.save
+        @step_a.step = @step_a.step -1
+        @step_a.save
       end
     else
       save_status = false
@@ -97,21 +99,24 @@ class DirectionsController < ApplicationController
   end
 
   def step_down
-    @ingredient_a = RecipeIngredient.find_by(params[:id])
-    @ingredient_b = RecipeIngredient.where(recipe_id: @ingredient_a.recipe.id).find_by(step: (@ingredient_a.step - 1))
-    @ingredient_a.step = @ingredient_b.step
-    @ingredient_b.step = @ingredient_a.step + 1
-    save_status_a = @ingredient_a.save
+    @step_a = Direction.find_by(id: params[:id])
+    directions = Direction.where(recipe_id: @step_a.recipe_id)
+    @step_b = directions.find_by(step: (@step_a.step - 1))
+    a_s = @step_a.step
+    b_s = @step_b.step
+    @step_a.step = b_s
+    @step_b.step = a_s
+    save_status_a = @step_a.save
 
     # Make sure both Steps A and B are updated successfully
     if save_status_a == true
-      save_status_b = @ingredient_b.save
+      save_status_b = @step_b.save
       if save_status_b == true
-        save_status == true
+        save_status = true
       else
         save_status = false
-        @ingredient_a.step = @ingredient_a.step + 1
-        @ingredient_a.save
+        @step_a.step = @step_a.step + 1
+        @step_a.save
       end
     else
       save_status = false

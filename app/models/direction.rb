@@ -1,7 +1,7 @@
 class Direction < ActiveRecord::Base
   #Validations
   validates :recipe_id, presence: true
-  validates :step, presence: true, uniqueness: { scope: :recipe_id}
+  validates :step, presence: true
   validates :description, presence: true, uniqueness: { scope: :recipe_id}
   #---------------
 

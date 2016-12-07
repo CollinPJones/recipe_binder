@@ -14,7 +14,7 @@ class RatingsController < ApplicationController
   end
 
   def update
-    @rating = Rating.find_by(params[:id])
+    @rating = Rating.find_by(id: params[:id])
     @rating.score = params[:score].to_f.round(0)
     save_status = @rating.save
 
