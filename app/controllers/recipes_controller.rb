@@ -13,8 +13,7 @@ class RecipesController < ApplicationController
       @title = "#{@user.username}\'s Recipes"
     end
 
-    @recipes = Recipe.where(user_id: current_user.id)
-    @courses = Course.all.order("name")
+    @recipes = Recipe.where(user_id: @user.id)
     render("recipes/index_alternate.html.erb")
   end
 

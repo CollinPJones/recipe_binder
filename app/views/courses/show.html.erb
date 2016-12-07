@@ -26,7 +26,7 @@
   </div>
   <!-- Recipe Author -->
   <div class="col-md-2">
-    <%= "by #{recipe.user.username}" %>
+    <a href="/user_recipes/<%= recipe.user.id %>"> <%= "by #{recipe.user.username}" %></a>
   </div>
   <!-- Recipe Rating -->
   <div class="col-md-2">
