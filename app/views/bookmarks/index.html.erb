@@ -18,11 +18,11 @@
 <div class="row">
   <!-- Recipe Name -->
   <div class="col-md-2 col-md-offset-1">
-    <%= recipe.name %>
+    <a href="/recipes/<%= recipe.id %>"><%= recipe.name %></a>
   </div>
   <!-- Recipe Author -->
   <div class="col-md-2">
-    <a href="/courses/<%= recipe.course.id %>"> <%= recipe.course.name%></a>
+    <a href="/user_recipes/<%= recipe.user.id %>"> <%= "by #{recipe.user.username}" %></a>
   </div>
   <!-- Recipe Rating -->
   <div class="col-md-2">
@@ -46,9 +46,9 @@
     </font>
     <% end %>
   </div>
-  <!-- Recipe description -->
-  <div class="col-md-2">
-    <%= truncate(recipe.description, length: 25, separator: ' ') %>
+  <!-- Recipe Course -->
+  <<div class="col-md-2">
+    <a href="/courses/<%= recipe.course.id %>"> <%= recipe.course.name%></a>
   </div>
   <!-- Recipe Actions-->
   <div class="col-md-2">
