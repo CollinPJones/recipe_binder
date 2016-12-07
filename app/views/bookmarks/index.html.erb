@@ -6,3 +6,127 @@
   </div>
 </div>
 <br>
+
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <hr>
+  </div>
+</div>
+
+<% @bookmarks.each do |bookmark| %>
+<% recipe = bookmark.recipe %>
+<div class="row">
+  <!-- Recipe Name -->
+  <div class="col-md-2 col-md-offset-1">
+    <%= recipe.name %>
+  </div>
+  <!-- Recipe Author -->
+  <div class="col-md-2">
+    <a href="/courses/<%= recipe.course.id %>"> <%= recipe.course.name%></a>
+  </div>
+  <!-- Recipe Rating -->
+  <div class="col-md-2">
+    <% if recipe.average_rating == nil %>
+    <font color="grey">
+      <% for i in 1..5 do %>
+      <i class="fa fa-star-o fa-lg" aria-hidden="true"></i>
+      <% end %>
+    </font>
+    <% else %>
+    <font color="gold">
+      <% for i in 1..5 do %>
+      <% if (i.to_f - 0.25) <= recipe.average_rating %>
+      <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+      <% elsif  (i.to_f - 0.75) <= recipe.average_rating %>
+      <i class="fa fa-star-half-o fa-lg" aria-hidden="true"></i>
+      <% else %>
+      <i class="fa fa-star-o fa-lg" aria-hidden="true"></i>
+      <% end %>
+      <% end %>
+    </font>
+    <% end %>
+  </div>
+  <!-- Recipe description -->
+  <div class="col-md-2">
+    <%= truncate(recipe.description, length: 25, separator: ' ') %>
+  </div>
+  <!-- Recipe Actions-->
+  <div class="col-md-2">
+
+    <!-- Show Modal Button -->
+    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#recipeModal<%= recipe.id %>">
+      <i class="fa fa-search" aria-hidden="true"></i>
+    </button>
+
+    <!-- Show Modal -->
+    <div class="modal fade" id="recipeModal<%= recipe.id %>" tabindex="-1" role="dialog" aria-labelledby="recipeModal<%= recipe.id %>Label">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="recipeModal<%= recipe.id %>Label">
+              <!-- Recipe Name In Modal Header -->
+              <font style="font-size: 20px;"><%= recipe.name %></font>
+              <!-- Average Rating In Modal Header -->
+              <% if recipe.average_rating == nil %>
+              <font color="grey">
+                <% for i in 1..5 do %>
+                <i class="fa fa-star-o fa-lg" aria-hidden="true"></i>
+                <% end %>
+              </font>
+              <% else %>
+              <font color="gold">
+                <% for i in 1..5 do %>
+                <% if (i.to_f - 0.25) <= recipe.average_rating %>
+                <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+                <% elsif  (i.to_f - 0.75) <= recipe.average_rating %>
+                <i class="fa fa-star-half-o fa-lg" aria-hidden="true"></i>
+                <% else %>
+                <i class="fa fa-star-o fa-lg" aria-hidden="true"></i>
+                <% end %>
+                <% end %>
+              </font>
+              <% end %>
+            </h4>
+          </div>
+          <div class="modal-body">
+            <!-- Recipe Image -->
+            <img src="<%= recipe.image %>" alt="<%= recipe.name %>" class="img-responsive">
+            <br>
+
+            <!-- Author -->
+            <p><%= "Author\: #{recipe.user.username}" %></p>
+
+            <!-- description -->
+            <p style="text-align: justify;"><%= "\"#{recipe.description}\"" %></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <a href="/recipes/<%= recipe.id %>" class="btn btn-primary">View Recipe</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Like button and form -->
+    <% if current_user.bookmarks.find_by(recipe_id: recipe.id) == nil %>
+    <a href="/create_bookmark/<%= recipe.id %>/<%= current_user.id %>" class="btn btn-success btn-sm"><i class="fa fa-bookmark-o" aria-hidden="true"></i></a>
+    <% else %>
+    <a href="/delete_bookmark/<%= current_user.bookmarks.find_by(recipe_id: recipe.id).id %>" class="btn btn-success btn-sm"><i class="fa fa-bookmark" aria-hidden="true"></i></a>
+    <% end %>
+    <% if current_user.id == recipe.user.id %>
+    <!-- Edit  -->
+    <a href="/recipes/<%= recipe.id %>/edit" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+
+    <!-- Delete -->
+    <a href="/delete_recipe/<%= recipe.id %>" class="btn btn-danger btn-sm" rel="nofollow"><i class="fa fa-trash" aria-hidden="true"></i></a>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <hr>
+  </div>
+</div>
+<% end %>
