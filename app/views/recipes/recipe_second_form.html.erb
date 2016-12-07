@@ -76,12 +76,12 @@
       Time:
       <% if @recipe.cook_time_hrs != nil %>
       <% if @recipe.cook_time_minutes != nil %>
-        <%= "#{@recipe.cook_time_hrs} hr #{@recipe.cook_time_minutes} min" %>
+      <%= "#{@recipe.cook_time_hrs} hr #{@recipe.cook_time_minutes} min" %>
       <% else %>
-        <%= "#{@recipe.cook_time_hrs} hr" %>
+      <%= "#{@recipe.cook_time_hrs} hr" %>
       <% end %>
       <% elsif @recipe.cook_time_minutes != nil %>
-        <%= "#{@recipe.cook_time_minutes} min" %>
+      <%= "#{@recipe.cook_time_minutes} min" %>
       <% end %>
     </font>
   </div>
@@ -114,12 +114,12 @@
 </div>
 
 <div class="row">
-<form action="/create_recipe_ingredient" method="post">
-  <!-- Hidden input for Authenticity token -->
-  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+  <form action="/create_recipe_ingredient" method="post">
+    <!-- Hidden input for Authenticity token -->
+    <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
-  <!-- Hidden input for Recipe ID -->
-  <input type="hidden" name="recipe_id" value="<%= @recipe.id %>">
+    <!-- Hidden input for Recipe ID -->
+    <input type="hidden" name="recipe_id" value="<%= @recipe.id %>">
 
 
 
@@ -130,126 +130,172 @@
         <datalist id="ingredients">
           <% Ingredient.pluck(:name).each do |ingredient| %>
           <option value="<%= ingredient %>">
-          <% end %>
-        </datalist>
+            <% end %>
+          </datalist>
+        </div>
       </div>
-    </div>
 
-    <!-- Label and Input for Quantity -->
-    <div class="col-md-2">
-      <div class="form-group">
-        <input type="text" id="quantity" name="quantity" placeholder="Quantity" class="form-control">
+      <!-- Label and Input for Quantity -->
+      <div class="col-md-2">
+        <div class="form-group">
+          <input type="text" id="quantity" name="quantity" placeholder="Quantity" class="form-control">
+        </div>
       </div>
-    </div>
 
-    <!-- Label and Input for measurement_units -->
-    <div class="col-md-2">
-      <div class="form-group">
-        <%= select_tag(:measurement_unit_id, options_from_collection_for_select(MeasurementUnit.all, :id, :name), :class => "form-control", include_blank: "Unit") %>
+      <!-- Label and Input for measurement_units -->
+      <div class="col-md-2">
+        <div class="form-group">
+          <%= select_tag(:measurement_unit_id, options_from_collection_for_select(MeasurementUnit.all, :id, :name), :class => "form-control", include_blank: "Unit") %>
+        </div>
       </div>
-    </div>
 
-    <!-- Action -->
-    <div class="col-md-2">
-      <button class="btn btn-success">
-        <i class="fa fa-plus"></i>
-      </button>
-    </div>
-</form>
-</div>
-
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
-    <h2>Directions</h2>
-    <hr>
+      <!-- Action -->
+      <div class="col-md-2">
+        <button class="btn btn-success">
+          <i class="fa fa-plus"></i>
+        </button>
+      </div>
+    </form>
   </div>
-</div>
 
-<% if @directions.count !=0 %>
-<% @directions.order(:step).each do |direction| %>
-<div class="row">
-  <div class="col-md-1 col-md-offset-2" style="text-align: right;">
-    <font style="font-weight: 300"><%= "Step #{direction.step}" %></font>
-  </div>
-  <div class="col-md-5">
-    <%= direction.description %>
-  </div>
-  <div class="col-md-2">
-    <% if direction.step !=  @directions.order(:step).first.step %>
-    <a href="/step_down_direction/<%= direction.id %>" class="btn btn-default btn-sm"><i class="fa fa-chevron-down" aria-hidden="true"></i></i></a>
-    <% end %>
-    <% if direction.step != @directions.order(:step).last.step%>
-    <a href="/step_up_direction/<%= direction.id %>" class="btn btn-default btn-sm"><i class="fa fa-chevron-up" aria-hidden="true"></i></i></a>
-    <% end %>
-    <!-- Edit  -->
-    <a href="/directions/<%= direction.id %>/edit" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
-
-    <!-- Delete -->
-    <a href="/delete_direction/<%= direction.id%>" class="btn btn-danger btn-sm" rel="nofollow"><i class="fa fa-trash" aria-hidden="true"></i></a>
-  </div>
-</div>
-<% end %>
-<% end %>
-<br>
-
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
-    <h3>Add Step</h3>
-  </div>
-</div>
-
-
-
-<!-- Quick add form for descriptions -->
-<form action="/create_direction" method="post">
   <div class="row">
-  <!-- Hidden input for Authenticity token -->
-  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-
-  <!-- Hidden input for Recipe ID -->
-  <input type="hidden" name="recipe_id" value="<%= @recipe.id %>">
-
-  <!-- Hidden input for Step -->
-  <% if @directions.count == 0 %>
-  <input type="hidden" name="step" value="<%= 1 %>">
-  <% else %>
-  <input type="hidden" name="step" value="<%= (@directions.count + 1) %>">
-  <% end %>
-
-  <!-- Label and input for description -->
-  <div class="col-md-8 col-md-offset-2">
-    <div class="form-group">
-      <label for="description" class="control-label">
-        Description
-      </label>
-      <textarea id="description" name="description" placeholder="Step Description" class="form-control" rows="3"></textarea>
+    <div class="col-md-8 col-md-offset-2">
+      <h2>Directions</h2>
+      <hr>
     </div>
   </div>
 
-</div>
-
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
-      <button class="btn btn-success">
-        Add Step
+  <% if @directions.count !=0 %>
+  <% @directions.order(:step).each do |direction| %>
+  <div class="row">
+    <div class="col-md-1 col-md-offset-2" style="text-align: right;">
+      <font style="font-weight: 300"><%= "Step #{direction.step}" %></font>
+    </div>
+    <div class="col-md-5">
+      <%= direction.description %>
+    </div>
+    <div class="col-md-2">
+      <% if direction.step !=  @directions.order(:step).first.step %>
+      <a href="/step_down_direction/<%= direction.id %>" class="btn btn-default btn-sm"><i class="fa fa-chevron-down" aria-hidden="true"></i></i></a>
+      <% end %>
+      <% if direction.step != @directions.order(:step).last.step%>
+      <a href="/step_up_direction/<%= direction.id %>" class="btn btn-default btn-sm"><i class="fa fa-chevron-up" aria-hidden="true"></i></i></a>
+      <% end %>
+      <!-- Edit  -->
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#<%= direction.id %>Modal">
+        <i class="fa fa-edit"></i>
       </button>
-  </div>
-</div>
-</form>
-<br>
+      <!-- Modal -->
+      <div class="modal fade" id="<%= direction.id %>Modal" tabindex="-1" role="dialog" aria-labelledby="<%= direction.id %>ModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="<%= direction.id %>ModalLabel">Step <%= direction.step %></h4>
+            </div>
+            <form action="/update_direction/<%= direction.id %>" method="post">
+            <div class="modal-body">
 
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
-    <div class="btn-group btn-group-justified">
-      <a href="/recipes/<%= @recipe.id %>/edit" class="btn btn-primary">
-        <i class="fa fa-chevron-left" aria-hidden="true"></i>
-      </a>
-      <a href="/delete_recipe/<%= @recipe.id %>" class="btn btn-danger" rel="nofollow">
-        <i class="fa fa-trash" aria-hidden="true"></i>
-      </a>
-      <a href="/user_recipes/<%= current_user.id %>" class="btn btn-success">
-        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-      </a>
+                <!-- Hidden input for authenticity token to protect from forgery -->
+                <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+                <!-- Hidden input for recipe_id -->
+                <input name="recipe_id" type="hidden" value="<%= @recipe.id %>">
+
+                <!-- Hidden input for step -->
+                <input name="step" type="hidden" value="<%= direction.step %>">
+
+                <!-- Input for descripton -->
+                <div class="form-group">
+                  <label for="description" class="control-label">
+                    Description
+                  </label>
+
+                  <textarea id="description" name="description" placeholder="Description" class="form-control" rows="6"><%= direction.description %></textarea>
+                </div>
+
+
+
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-warning">
+                Update Direction
+              </button>
+              or
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Delete -->
+      <a href="/delete_direction/<%= direction.id%>" class="btn btn-danger btn-sm" rel="nofollow"><i class="fa fa-trash" aria-hidden="true"></i></a>
     </div>
   </div>
-</div>
+  <% end %>
+  <% end %>
+  <br>
+
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <h3>Add Step</h3>
+    </div>
+  </div>
+
+
+
+  <!-- Quick add form for descriptions -->
+  <form action="/create_direction" method="post">
+    <div class="row">
+      <!-- Hidden input for Authenticity token -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Hidden input for Recipe ID -->
+      <input type="hidden" name="recipe_id" value="<%= @recipe.id %>">
+
+      <!-- Hidden input for Step -->
+      <% if @directions.count == 0 %>
+      <input type="hidden" name="step" value="<%= 1 %>">
+      <% else %>
+      <input type="hidden" name="step" value="<%= (@directions.count + 1) %>">
+      <% end %>
+
+      <!-- Label and input for description -->
+      <div class="col-md-8 col-md-offset-2">
+        <div class="form-group">
+          <label for="description" class="control-label">
+            Description
+          </label>
+          <textarea id="description" name="description" placeholder="Step Description" class="form-control" rows="3"></textarea>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <button class="btn btn-success">
+          Add Step
+        </button>
+      </div>
+    </div>
+  </form>
+  <br>
+
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="btn-group btn-group-justified">
+        <a href="/recipes/<%= @recipe.id %>/edit" class="btn btn-primary">
+          <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        </a>
+        <a href="/delete_recipe/<%= @recipe.id %>" class="btn btn-danger" rel="nofollow">
+          <i class="fa fa-trash" aria-hidden="true"></i>
+        </a>
+        <a href="/user_recipes/<%= current_user.id %>" class="btn btn-success">
+          <i class="fa fa-chevron-right" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </div>
