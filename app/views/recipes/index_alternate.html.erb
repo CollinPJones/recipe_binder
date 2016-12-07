@@ -123,6 +123,7 @@
     <% else %>
     <a href="/delete_bookmark/<%= current_user.bookmarks.find_by(recipe_id: recipe.id).id %>" class="btn btn-success btn-sm"><i class="fa fa-bookmark" aria-hidden="true"></i></a>
     <% end %>
+    
     <% if current_user.id == recipe.user.id %>
     <!-- Edit  -->
     <a href="/recipes/<%= recipe.id %>/edit" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>

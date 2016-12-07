@@ -19,8 +19,8 @@ class BookmarksController < ApplicationController
   end
 
   def destroy
-    @bookmark = Bookmark.find_by(params[:id])
-    
+    @bookmark = Bookmark.find_by(id: params[:id])
+
     @bookmark.destroy
 
     redirect_to(:back, :notice => "Bookmark deleted.")
