@@ -50,8 +50,7 @@
         <label for="category_id" class="control-label">
           Category
         </label>
-
-        <input type="text" id="category_id" name="category_id" placeholder="Category" class="form-control" value="<%= @ingredient.category_id %>">
+        <%= select_tag(:category_id , options_from_collection_for_select(IngredientCategory.all, :id, :name, @ingredient.category_id), :class => "form-control", include_blank: "Category") %>
       </div>
 
       <!-- Label and input for purchase_measurement_unit_id -->
@@ -59,8 +58,8 @@
         <label for="purchase_measurement_unit_id" class="control-label">
           Purchase measurement unit
         </label>
+        <%= select_tag(:purchase_measurement_unit_id , options_from_collection_for_select(MeasurementUnit.all, :id, :name, @ingredient.purchase_measurement_unit_id), :class => "form-control", include_blank: "Purchase Unit") %>
 
-        <input type="text" id="purchase_measurement_unit_id" name="purchase_measurement_unit_id" placeholder="Purchase measurement unit" class="form-control" value="<%= @ingredient.purchase_measurement_unit_id %>">
       </div>
 
       <button class="btn btn-warning">

@@ -32,8 +32,7 @@
         <label for="measurement_id" class="control-label">
           Measurement
         </label>
-
-        <input type="text" id="measurement_id" name="measurement_id" placeholder="Measurement" class="form-control" value="<%= @measurement_unit.measurement_id %>">
+        <%= select_tag(:measurement_id , options_from_collection_for_select(Measurement.all, :id, :name, @measurement_unit.measurement_id), :class => "form-control", include_blank: "Measurement") %>
       </div>
 
       <button class="btn btn-warning">
