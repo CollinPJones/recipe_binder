@@ -4,8 +4,7 @@
 # Examples:
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
+  # Character.create(name: 'Luke', movie: movies.first)
 
 # require 'csv'
 
@@ -20,8 +19,8 @@
 # end
 #
 # puts "There are now #{MeasurementUnit.count} rows in the measurement units table"
-
-
+#
+#
 # csv_text_ingredient = File.read(Rails.root.join('lib', 'seeds', 'ingredients3.csv'))
 # csv_ingredient = CSV.parse(csv_text_ingredient, :headers => true, :encoding => 'ISO-8859-1')
 # csv_ingredient.each do |row|
